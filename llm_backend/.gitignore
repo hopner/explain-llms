@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environment
+venv/
+.env
+.venv/
+ENV/
+env/
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# VS Code / IDEs
+.vscode/
+.idea/
+*.swp
+
+# MacOS / Linux
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Migrations (optional, sometimes included)
+**/migrations/__pycache__/
+**/migrations/*.pyc
+
+# Coverage/testing
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
