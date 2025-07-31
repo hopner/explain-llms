@@ -15,7 +15,7 @@ Built with:
 ## Getting Started
 ### Backend Setup
 1. Navigate to the `llm-backend/` directory.
-2. Create a virtual environment:
+2. Create a virtual environment (optional):
     ```bash
     python -m venv venv
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
