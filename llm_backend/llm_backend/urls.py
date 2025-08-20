@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from content.views import ChapterView
+from content.views import ChapterView, PredictView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chapter/<slug:slug>/', ChapterView.as_view()),
+    path('api/predict/', PredictView.as_view()),
 ]
