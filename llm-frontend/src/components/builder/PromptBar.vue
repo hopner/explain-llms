@@ -42,7 +42,6 @@ const emit = defineEmits(['used'])
   </div>
 </template>
 
-
 <style scoped>
 .input-wrapper {
   width: 100%;
