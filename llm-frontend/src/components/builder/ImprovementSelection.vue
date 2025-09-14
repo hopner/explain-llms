@@ -21,7 +21,7 @@ onMounted(async () => {
 async function selectAlternative(featureId: string) {
   try {
     await addFeatureToConfig(featureId)
-    console.log('Routing to explanation')
+    router.push({name: 'MockChapter'})
   } catch (e) {
     error.value = 'Could not add improvement.'
   }

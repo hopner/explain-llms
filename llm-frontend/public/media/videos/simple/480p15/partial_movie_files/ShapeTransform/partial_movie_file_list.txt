@@ -1,0 +1,4 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/alexander/Documents/Studier/master/explain-llms/llm-frontend/public/media/videos/simple/480p15/partial_movie_files/ShapeTransform/1185818338_1098900831_223132457.mp4'
+file 'file:/Users/alexander/Documents/Studier/master/explain-llms/llm-frontend/public/media/videos/simple/480p15/partial_movie_files/ShapeTransform/624642324_3451063675_3481380946.mp4'
+file 'file:/Users/alexander/Documents/Studier/master/explain-llms/llm-frontend/public/media/videos/simple/480p15/partial_movie_files/ShapeTransform/624642324_4217992463_1804322048.mp4'
