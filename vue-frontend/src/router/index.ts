@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Builder from '../views/Builder.vue'
+import ExampleChapter from '../views/ExampleChapter.vue'
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'Overvie', component: HomeView },
+    { path: '/', name: 'Overview', component: HomeView },
     { path: '/builder', name: 'Builder', component: Builder },
+    { path: '/example', name: 'Example', component: ExampleChapter }
   ]
 })
