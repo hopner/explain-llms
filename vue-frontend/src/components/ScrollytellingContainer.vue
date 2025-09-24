@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
         class="story-step"
       >
         <h2>{{ step.title }}</h2>
-        <p>{{ step.text }}</p>
+        <div>{{ step.text }}</div>
       </section>
     </div>
   </div>
@@ -103,11 +103,13 @@ onBeforeUnmount(() => {
 .story {
   display: flex;
   flex-direction: column;
-  gap: 100vh; /* pacing for scroll */
+  gap: 5vh; /* pacing for scroll */
+  padding-top: 50vh;
+  padding-bottom: 50vh;
 }
 
 .story-step {
-  min-height: 100vh;
+  min-height: 5vh;
   padding: 2rem;
   border-left: 3px solid #eee;
   transition: background 0.3s;
