@@ -49,7 +49,18 @@ FEATURE_CONFIG_MAP = {
 }
 
 def get_unlocked_features(selected_features):
+    if not selected_features:
+        return list(SELECTION_TREE.keys())
+
+    unlocked = set()
+
     node = SELECTION_TREE
     for f in selected_features:
+        unlocked.update(node.keys())
         node = node.get(f, {})
-    return list(node.keys())
+
+    unlocked.update(node.keys())
+
+    unlocked -= set(selected_features)
+
+    return sorted(unlocked)
