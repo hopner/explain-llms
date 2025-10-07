@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from text_generation.views import PredictView
+from text_generation.views import PredictView, AddFeatureView, AvailableFeaturesView, TrainView
 from users.views import UserCreateView, UserConfigView
 
 urlpatterns = [
@@ -24,4 +24,7 @@ urlpatterns = [
     path('api/predict/', PredictView.as_view()),
     path('api/users/', UserCreateView.as_view()),
     path('api/users/<str:guid>/config/', UserConfigView.as_view()),
+    path('api/add-feature/', AddFeatureView.as_view()),
+    path('api/available-features/', AvailableFeaturesView.as_view()),
+    path('api/train/', TrainView.as_view()),
 ]
