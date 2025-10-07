@@ -7,21 +7,28 @@ class NGramPredictor(Predictor):
         super().__init__()
         self.depth = depth
         self.mode = mode
-        self.model = {}
+        self.model = {"counts": {}}
         self.tokenizer = None
 
     def train(self, tokens: list[str], tokenizer=None) -> dict:
         if tokenizer:
             self.tokenizer = tokenizer
-        model = {'ngram': self.depth, "counts": defaultdict(Counter)}
-        for i in range(len(tokens) - self.depth):
-            key = " ".join(tokens[i:i + self.depth])
-            next_word = tokens[i + self.depth]
-            model["counts"][key][next_word] += 1
 
-        model["counts"] = {k: dict(v) for k, v in model["counts"].items()}
-        self.model = model
-        return model
+        all_counts = {d: defaultdict(Counter) for d in range(1, self.depth + 1)}
+        for d in range(1, self.depth + 1):
+            for i in range(len(tokens) - d):
+                key = " ".join(tokens[i:i + d])
+                next_word = tokens[i + d]
+                all_counts[d][key][next_word] += 1
+
+        self.model = {
+            "ngram": self.depth,
+            "counts": {
+                d: {k: dict(v) for k, v in all_counts[d].items()} for d in range(1, self.depth + 1)
+            },
+            "tokenizer": getattr(self.tokenizer, 'tokenizer_type', 'whitespace') if self.tokenizer else 'whitespace',
+        }
+        return self.model
     
     def load(self, model: dict):
         self.depth = model.get('ngram', self.depth)
@@ -32,16 +39,28 @@ class NGramPredictor(Predictor):
             raise ValueError("Model is not trained or loaded properly.")
         
         tokens = self.tokenizer.tokenize(prompt) if self.tokenizer else prompt.strip().split()
-        if len(tokens) < self.depth:
-            raise ValueError(f"Prompt must have at least {self.depth} tokens.")
+
+        if not tokens:
+            vocab = self._get_vocabulary()
+            return random.choice(vocab) if vocab else ""
         
-        key = " ".join(tokens[-self.depth:])
-        options = self.model['counts'].get(key)
-        if not options:
-            return None
-        if self.mode == 'deterministic':
-            return max(options.items(), key=lambda x: x[1])[0]
-        else:
-            words, weights = zip(*options.items())
-            return random.choices(words, weights=weights)[0]
+        for d in range(min(self.depth, len(tokens)), 0, -1):
+            key = " ".join(tokens[-d:])
+            options = self.model['counts'].get(d, {}).get(key)
+
+            if options:
+                if self.mode == 'deterministic':
+                    return max(options.items(), key=lambda x: x[1])[0]
+                else:
+                    words, weights = zip(*options.items())
+                    return random.choices(words, weights=weights)[0]
+                
+        vocab = self._get_vocabulary()
+        return random.choice(vocab) if vocab else ""
         
+    def _get_vocabulary(self) -> list[str]:
+        """Collects all possible next tokens from the model."""
+        vocab = set()
+        for options in self.model.get("counts", {}).values():
+            vocab.update(options.keys())
+        return list(vocab)

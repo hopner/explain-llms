@@ -54,13 +54,17 @@ def get_unlocked_features(selected_features):
 
     unlocked = set()
 
-    node = SELECTION_TREE
-    for f in selected_features:
-        unlocked.update(node.keys())
-        node = node.get(f, {})
+    def traverse(node, selected_path):
+        """Recursively unlock children only along selected paths."""
+        for feature, children in node.items():
+            if feature in selected_path:
+                traverse(children, selected_path)
+            else:
+                unlocked.add(feature)
 
-    unlocked.update(node.keys())
+    traverse(SELECTION_TREE, set(selected_features))
 
     unlocked -= set(selected_features)
-
     return sorted(unlocked)
+
+

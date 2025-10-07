@@ -17,7 +17,7 @@ class PredictionPipeline:
                 mode=prev_cfg.get("mode", "deterministic")
             )
 
-            if pretrained_model and pretrained_model.get("ngram") == requested_depth:
+            if pretrained_model and self._is_model_compatible(pretrained_model, requested_depth):
                 self.predictor.load(pretrained_model)
             else:
                 self.predictor.train(self.corpus, self.tokenizer)
@@ -40,6 +40,26 @@ class PredictionPipeline:
                 print(f"Warning: Corpus file {path} not found.")
                 continue
         return corpus
+
+    def _is_model_compatible(self, model: dict, requested_depth: int) -> bool:
+        if not model:
+            return False
+        
+        if model.get("ngram") != requested_depth:
+            return False
+        
+        pretrained_tokenizer = model.get("tokenizer")
+        current_tokenizer = self.config.get("capabilities", {}).get("tokenizer", {}).get("type", "whitespace")
+        if pretrained_tokenizer != current_tokenizer:
+            return False
+        
+        pretrained_files = model.get("knowledge_files", [])
+        current_files = [entry.get("path") for entry in self.config.get("knowledge", []) if entry.get("path")]
+        if sorted(pretrained_files) != sorted(current_files):
+            return False
+        
+        return True
+
     
     def predict(self, prompt: str) -> str:
         if self.predictor is None:
