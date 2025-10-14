@@ -62,4 +62,20 @@ def get_unlocked_features(selected_features):
     unlocked -= set(selected_features)
     return sorted(unlocked)
 
-
+def get_tree_with_status(selected_features):
+    def traverse(node, path):
+        result = {}
+        for feature, children in node.items():
+            full_path = path + [feature]
+            if feature in selected_features:
+                status = "selected"
+            elif all(f in selected_features for f in path):
+                status = "available"
+            else:
+                status = "locked"
+            result[feature] = {
+                "status": status,
+                "children": traverse(children, full_path)
+            }
+        return result
+    return traverse(SELECTION_TREE, [])

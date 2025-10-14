@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 
 from .predictors.pipeline import PredictionPipeline
 from users.models import User
-from .predictors.selection_tree import SELECTION_TREE, FEATURE_CONFIG_MAP, get_unlocked_features
+from .predictors.selection_tree import SELECTION_TREE, FEATURE_CONFIG_MAP, get_unlocked_features, get_tree_with_status
 from .predictors.utils import merge_dicts
 
 class AddFeatureView(APIView):
@@ -43,11 +43,20 @@ class AvailableFeaturesView(APIView):
         user = get_object_or_404(User, guid=guid)
         selected = user.model_config.get("selected_features", [])
         unlocked = get_unlocked_features(selected)
-        
-        # Optionally include labels or config deltas
+
         features = [{"id": f, "label": f.capitalize()} for f in unlocked]
         return Response({"features": features})
 
+class SkillTreeView(APIView):
+    def get(self, request):
+        guid = request.COOKIES.get("user_guid")
+        if not guid:
+            return Response({"error": "User GUID cookie not found"}, status=400)
+        
+        user = get_object_or_404(User, guid=guid)
+        selected = user.model_config.get("selected_features", [])
+        tree = get_tree_with_status(selected)
+        return Response({"tree": tree})
 
 
 class TrainView(APIView):
