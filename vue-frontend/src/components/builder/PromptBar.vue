@@ -7,7 +7,10 @@ const prediction = ref('')
 const suggestion = ref('')
 
 async function handleKeyup(e: KeyboardEvent) {
-  if (e.key === 'Tab' && suggestion.value) {
+  const target = e.target as HTMLInputElement | null
+  const caretAtEnd = !!target && target.selectionStart === target.selectionEnd && target.selectionStart === input.value.length
+
+  if (e.key === 'ArrowRight' && suggestion.value && caretAtEnd) {
     e.preventDefault()
     input.value += suggestion.value
     prediction.value = ''
