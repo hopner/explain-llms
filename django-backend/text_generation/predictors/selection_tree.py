@@ -1,3 +1,5 @@
+from .utils import merge_dicts
+
 SELECTION_TREE = {
     "read_book": {
         "read_another": {
@@ -62,4 +64,28 @@ def get_unlocked_features(selected_features):
     unlocked -= set(selected_features)
     return sorted(unlocked)
 
+def get_tree_with_status(selected_features):
+    def traverse(node, path):
+        result = {}
+        for feature, children in node.items():
+            full_path = path + [feature]
+            if feature in selected_features:
+                status = "selected"
+            elif all(f in selected_features for f in path):
+                status = "available"
+            else:
+                status = "locked"
+            result[feature] = {
+                "status": status,
+                "children": traverse(children, full_path)
+            }
+        return result
+    return traverse(SELECTION_TREE, [])
 
+def rebuild_config_from_selected(selected_features = []):
+    config = {}
+    for feat in selected_features:
+        feat_config = FEATURE_CONFIG_MAP.get(feat, {})
+        config = merge_dicts(config, feat_config)
+    config["selected_features"] = selected_features
+    return config
