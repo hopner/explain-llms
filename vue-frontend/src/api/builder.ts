@@ -58,3 +58,20 @@ export async function addFeatureToConfig(featureId: string): Promise<void> {
     localStorage.setItem('trainedModel', JSON.stringify(data.model))
   }
 }
+
+export async function removeFeatureFromConfig(featureId: string): Promise<string[]> {
+  const model = JSON.parse(localStorage.getItem('trainedModel') || 'null')
+  const response = await fetch('/api/remove-feature/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ feature_id: featureId, model }),
+  })
+  
+  if (!response.ok) throw new Error('Remove feature API error')
+
+  const data = await response.json()
+  if (data.model) {
+    localStorage.setItem('trainedModel', JSON.stringify(data.model))
+  }
+  return data.removed_features
+}

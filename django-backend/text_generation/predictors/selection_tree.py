@@ -1,3 +1,5 @@
+from .utils import merge_dicts
+
 SELECTION_TREE = {
     "read_book": {
         "read_another": {
@@ -79,3 +81,11 @@ def get_tree_with_status(selected_features):
             }
         return result
     return traverse(SELECTION_TREE, [])
+
+def rebuild_config_from_selected(selected_features = []):
+    config = {}
+    for feat in selected_features:
+        feat_config = FEATURE_CONFIG_MAP.get(feat, {})
+        config = merge_dicts(config, feat_config)
+    config["selected_features"] = selected_features
+    return config

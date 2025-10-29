@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as d3 from 'd3'
 import { onMounted, ref, watch, nextTick } from 'vue'
-import { fetchSkillTree, addFeatureToConfig } from '../../api/builder'
+import { fetchSkillTree, addFeatureToConfig, removeFeatureFromConfig } from '../../api/builder'
 import { useRouter } from 'vue-router'
 
 const props = defineProps<{
@@ -122,6 +122,7 @@ function drawTree(treeData: any) {
             .on('mouseout', function () { d3.select(this).attr('fill-opacity', 1) })
             .on('click', function () {
                 if (d.data.status === 'available') selectAlternative(d.data.name)
+                else if (d.data.status === 'selected') removeSelected(d.data.name)
             })
 
         g.append('text')
@@ -142,6 +143,22 @@ async function selectAlternative(featureId: string) {
         await addFeatureToConfig(featureId)
     } catch (e) {
         error.value = 'Could not add improvement.'
+    }
+}
+
+async function removeSelected(featureId: string) {
+    try {
+        const confirmed = window.confirm('Are you sure you want to remove this improvement and all its dependent improvements?')
+        if (!confirmed) return
+
+        const removed = await removeFeatureFromConfig(featureId)
+        window.alert(`Removed the following improvements: ${removed.length ? removed.join(', ') : 'None'}`)
+
+        data.value = await fetchSkillTree()
+        await nextTick()
+        drawTree(data.value)
+    } catch (e) {
+        error.value = 'Could not remove improvement.'
     }
 }
 </script>
