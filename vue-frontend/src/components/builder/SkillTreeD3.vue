@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 import { onMounted, ref, watch, nextTick } from 'vue'
 import { fetchSkillTree, addFeatureToConfig, removeFeatureFromConfig } from '../../api/builder'
 import { useRouter } from 'vue-router'
+import { featureToRoute } from '../../router/featureRoutes'
 
 const props = defineProps<{
     boundingBox?: { width: number; height: number }
@@ -139,7 +140,8 @@ function drawTree(treeData: any) {
 
 async function selectAlternative(featureId: string) {
     try {
-        router.push({ name: 'Example' })
+        const routeName = featureToRoute(featureId)
+        router.push({ name: routeName })
         await addFeatureToConfig(featureId)
     } catch (e) {
         error.value = 'Could not add improvement.'
