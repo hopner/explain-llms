@@ -1,17 +1,7 @@
-export async function fetchPrediction(prompt: string): Promise<string> {
-  const model = JSON.parse(localStorage.getItem('trainedModel') || 'null')
+import { predict } from './predictor'
 
-  const response = await fetch('/api/predict/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, model }),
-  })
-  if (!response.ok) throw new Error('Prediction API error')
-  const data = await response.json()
-  if (data.model) {
-    localStorage.setItem('trainedModel', JSON.stringify(data.model))
-  }
-  return data.prediction
+export async function fetchPrediction(prompt: string): Promise<string> {
+  return predict(prompt)
 }
 
 export async function fetchAlternatives(): Promise<{ id: string, label: string }[]> {

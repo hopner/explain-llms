@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from .predictors.pipeline import PredictionPipeline
+from .predictors.tokenizer import Tokenizer
 from users.models import User
 from .predictors.selection_tree import SELECTION_TREE, FEATURE_CONFIG_MAP, get_unlocked_features, get_tree_with_status, rebuild_config_from_selected
 from .predictors.utils import merge_dicts
@@ -139,3 +140,17 @@ class PredictView(APIView):
         prediction = pipeline.predict(prompt)
         model_json = pipeline.get_model()
         return Response({'prediction': prediction, 'model': model_json})
+    
+
+class TokenizeView(APIView):
+    def post(self, request):
+        prompt = request.data.get('prompt', '')
+        if not prompt:
+            return Response({'error': 'No prompt provided'}, status=400)
+        tokenizer_type = request.data.get('tokenizer_type', 'whitespace')
+        tokenizer = Tokenizer(tokenizer_type)
+        try:
+            tokens = tokenizer.tokenize(prompt)
+        except Exception as e:
+            return Response({'error': f'Tokenization failed: {str(e)}'}, status=400)
+        return Response({'tokens': tokens})

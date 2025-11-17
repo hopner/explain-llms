@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from text_generation.views import PredictView, AddFeatureView, RemoveFeatureView, AvailableFeaturesView, TrainView, SkillTreeView
+from text_generation.views import (PredictView, 
+                                   AddFeatureView, 
+                                   RemoveFeatureView, 
+                                   AvailableFeaturesView, 
+                                   TrainView, 
+                                   SkillTreeView,
+                                   TokenizeView)
 from users.views import UserCreateView, UserConfigView
 
 urlpatterns = [
@@ -29,4 +35,5 @@ urlpatterns = [
     path('api/available-features/', AvailableFeaturesView.as_view()),
     path('api/skill-tree/', SkillTreeView.as_view()),
     path('api/train/', TrainView.as_view()),
+    path('api/tokenize/', TokenizeView.as_view()),
 ]
