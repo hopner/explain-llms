@@ -8,7 +8,9 @@ SELECTION_TREE = {
             }
         },
         "1gram": {
-            "2gram": {},
+            "2gram": {
+                "3gram": {}
+            },
             "weighted_random": {}
         },
         "tokenization": {
@@ -33,6 +35,9 @@ FEATURE_CONFIG_MAP = {
     },
     "2gram": {
         "capabilities": {"previous": {"enabled": True, "depth": 2, "mode": "deterministic"}}
+    },
+    "3gram": {
+        "capabilities": {"previous": {"enabled": True, "depth": 3, "mode": "deterministic"}}
     },
     "weighted_random": {
         "capabilities": {"previous": {"mode": "weighted"}}

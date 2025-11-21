@@ -16,9 +16,10 @@ class NGramPredictor(Predictor):
 
         all_counts = {d: defaultdict(Counter) for d in range(1, self.depth + 1)}
         for d in range(1, self.depth + 1):
-            for i in range(len(tokens) - d):
-                key = " ".join(tokens[i:i + d])
-                next_word = tokens[i + d]
+            context_length = d-1
+            for i in range(len(tokens) - context_length):
+                key = " ".join(tokens[i:i + context_length]) if context_length > 0 else ""
+                next_word = tokens[i + context_length]
                 all_counts[d][key][next_word] += 1
 
         self.model = {
@@ -44,8 +45,10 @@ class NGramPredictor(Predictor):
             vocab = self._get_vocabulary()
             return random.choice(vocab) if vocab else ""
         
-        for d in range(min(self.depth, len(tokens)), 0, -1):
-            key = " ".join(tokens[-d:])
+        max_n = min(self.depth, len(tokens)+1)
+        for d in range(max_n, 0, -1):
+            context_length = d - 1
+            key = " ".join(tokens[-context_length:]) if context_length > 0 else ""
             options = self.model['counts'].get(d, {}).get(key)
 
             if options:
@@ -64,3 +67,5 @@ class NGramPredictor(Predictor):
         for options in self.model.get("counts", {}).values():
             vocab.update(options.keys())
         return list(vocab)
+    
+    

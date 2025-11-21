@@ -53,8 +53,10 @@ function localNGramPredictFromTokens(tokens: string[], model: any): string {
     return randomFromArray(vocab) || ''
   }
 
-  for (let d = Math.min(depth, tokens.length); d >= 1; d--) {
-    const key = tokens.slice(-d).join(' ')
+  const maxN = Math.min(depth, tokens.length+1)
+  for (let d = maxN; d >= 1; d--) {
+    const contextLength = d - 1
+    const key = contextLength > 0 ? tokens.slice(-contextLength).join(' ') : ""
     const countsLevel = model.counts?.[String(d)] || model.counts?.[d]
     if (!countsLevel) continue
     const options = countsLevel[key]
