@@ -31,13 +31,13 @@ FEATURE_CONFIG_MAP = {
         "knowledge": []
     },
     "1gram": {
-        "capabilities": {"previous": {"enabled": True, "depth": 1, "mode": "deterministic"}}
+        "capabilities": {"previous": {"enabled": True, "depth": 1}}
     },
     "2gram": {
-        "capabilities": {"previous": {"enabled": True, "depth": 2, "mode": "deterministic"}}
+        "capabilities": {"previous": {"enabled": True, "depth": 2}}
     },
     "3gram": {
-        "capabilities": {"previous": {"enabled": True, "depth": 3, "mode": "deterministic"}}
+        "capabilities": {"previous": {"enabled": True, "depth": 3}}
     },
     "weighted_random": {
         "capabilities": {"previous": {"mode": "weighted"}}

@@ -28,6 +28,7 @@ class NGramPredictor(Predictor):
                 d: {k: dict(v) for k, v in all_counts[d].items()} for d in range(1, self.depth + 1)
             },
             "tokenizer": getattr(self.tokenizer, 'tokenizer_type', 'whitespace') if self.tokenizer else 'whitespace',
+            "mode": self.mode,
         }
         return self.model
     

@@ -53,6 +53,8 @@ function localNGramPredictFromTokens(tokens: string[], model: any): string {
     return randomFromArray(vocab) || ''
   }
 
+  const mode = model.mode || 'deterministic'  
+
   const maxN = Math.min(depth, tokens.length+1)
   for (let d = maxN; d >= 1; d--) {
     const contextLength = d - 1
@@ -61,8 +63,15 @@ function localNGramPredictFromTokens(tokens: string[], model: any): string {
     if (!countsLevel) continue
     const options = countsLevel[key]
     if (options && Object.keys(options).length) {
-      // choose most frequent (deterministic)
       const entries = Object.entries(options as Record<string, number>) as [string, number][]
+      if (mode === 'weighted') {
+        const total = entries.reduce((sum, [, count]) => sum + Number(count) || 0, 0)
+        let r = Math.random() * total
+        for (const [token, count] of entries) {
+          r -= (Number(count) || 0)
+          if (r <= 0) return token
+        }
+      }
       const best = entries.reduce((a, b) => (b[1] > a[1] ? b : a), ['', 0])
       return String(best[0])
     }
