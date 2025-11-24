@@ -47,7 +47,8 @@ function drawTree(treeData: any) {
     const height = props.boundingBox?.height ?? LAYOUT.height
     const margin = LAYOUT.margin
 
-    const svg = d3.select(svgRef.value)
+    if (!svgRef.value) return
+    const svg = d3.select(svgRef.value as unknown as SVGSVGElement)
         .attr('width', width)
         .attr('height', height)
         .style('background', 'transparent')
@@ -105,7 +106,17 @@ function drawTree(treeData: any) {
         const textLength = label.length * 7.2 // rough per-character width
         const boxWidth = Math.max(80, textLength + 20)
 
-        g.append('rect')
+        const button = g.append('g')
+            .attr('class', 'button')
+            .style('cursor', d.data.status === 'available' || d.data.status === 'selected' ? 'pointer' : 'default')
+            .on('mouseover', function () { d3.select(this).select('rect.visible').attr('fill-opacity', 0.85) })
+            .on('mouseout', function () { d3.select(this).select('rect.visible').attr('fill-opacity', 1) })
+            .on('click', function () {
+                if (d.data.status === 'available') selectAlternative(d.data.name)
+                else if (d.data.status === 'selected') removeSelected(d.data.name)
+            })
+
+        button.append('rect')
             .attr('x', -boxWidth / 2)
             .attr('y', -15)
             .attr('rx', 8)
@@ -118,15 +129,8 @@ function drawTree(treeData: any) {
                     default: return '#6b7280'
                 }
             })())
-            .style('cursor', d.data.status === 'available' ? 'pointer' : 'default')
-            .on('mouseover', function () { d3.select(this).attr('fill-opacity', 0.85) })
-            .on('mouseout', function () { d3.select(this).attr('fill-opacity', 1) })
-            .on('click', function () {
-                if (d.data.status === 'available') selectAlternative(d.data.name)
-                else if (d.data.status === 'selected') removeSelected(d.data.name)
-            })
 
-        g.append('text')
+        button.append('text')
             .attr('text-anchor', 'middle')
             .attr('alignment-baseline', 'middle')
             .attr('fill', '#e5e5e5')
@@ -179,7 +183,10 @@ async function removeSelected(featureId: string) {
 .node text {
     font-size: 12px;
     font-weight: 500;
-    pointer-events: none;
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 svg {
