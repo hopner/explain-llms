@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const modelBuilder = () => {
-    router.push({ name: 'Builder' });
+    router.push({ name: 'Intro' });
 };
 
 const chapterOverview = () => {
