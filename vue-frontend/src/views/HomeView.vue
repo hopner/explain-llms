@@ -29,16 +29,16 @@ const chapterOverview = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem; /* Adds space between buttons */
+  gap: 3rem;
   flex-direction: row;
   padding: 0;
 }
 
 button {
-  flex: 0 1 35vw;         /* Each button takes up to 35% of viewport width */
+  flex: 0 1 35vw;
   min-width: 250px;
   max-width: 500px;
-  height: 80vh;           /* Not full height */
+  height: 80vh;
   padding: 0;
   font-size: 2.5rem;
   cursor: pointer;
