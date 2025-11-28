@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Builder from '../views/Builder.vue'
 import ExampleChapter from '../views/ExampleChapter.vue'
 import OneGram from '../views/chapters/OneGram.vue'
+import DiGram from '../views/chapters/DiGram.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -10,6 +11,7 @@ export default createRouter({
     { path: '/', name: 'Overview', component: HomeView },
     { path: '/builder', name: 'Builder', component: Builder },
     { path: '/example', name: 'Example', component: ExampleChapter },
-    { path: '/chapters/onegram', name: 'OneGram', component: OneGram }
+    { path: '/chapters/onegram', name: 'OneGram', component: OneGram },
+    { path: '/chapters/digram', name: 'DiGram', component: DiGram }
   ]
 })

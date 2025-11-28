@@ -4,10 +4,10 @@ export function featureToRoute(featureId: string): string {
         '1gram': 'OneGram',
         'onegram': 'OneGram',
         '1-gram': 'OneGram',
-        // add more mappings here:
-        // 'someFeatureId': 'RouteName',
+        '2gram': 'DiGram',
+        'digram': 'DiGram',
+        '2-gram': 'DiGram',
     }
-    // try exact match, then fallback by contains
     if (map[id]) return map[id]
     return 'Example'
 }
