@@ -6,18 +6,19 @@ const input = ref('')
 const prediction = ref('')
 const suggestion = ref('')
 
-async function handleKeyup(e: KeyboardEvent) {
+async function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLInputElement | null
   const caretAtEnd = !!target && target.selectionStart === target.selectionEnd && target.selectionStart === input.value.length
 
-  if (e.key === 'ArrowRight' && suggestion.value && caretAtEnd) {
+    if ((e.key === 'ArrowRight' || e.key === 'Tab') && suggestion.value && caretAtEnd) {
     e.preventDefault()
     input.value += suggestion.value
     prediction.value = ''
     suggestion.value = ''
-    return
   }
+}
 
+async function handleKeyup() {
   if (input.value.endsWith(' ')) {
     prediction.value = await fetchPrediction(input.value)
     if (prediction.value.startsWith(input.value)) {
@@ -47,7 +48,7 @@ const emit = defineEmits(['used'])
       <div class="input-overlay">
         <span class="mirror">{{ input }}</span><span v-if="suggestion" class="ghost">{{ suggestion }}</span>
       </div>
-      <input v-model="input" @keyup="handleKeyup" @keyup.enter="submitPrompt" type="text"
+      <input v-model="input" @keydown="handleKeydown" @keyup="handleKeyup" @keyup.enter="submitPrompt" type="text"
         placeholder="Type your prompt..." autocomplete="off" spellcheck="false" />
     </div>
   </div>

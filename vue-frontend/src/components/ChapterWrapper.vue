@@ -6,7 +6,7 @@ import { defineProps } from 'vue';
 const props = defineProps({
   slidesSrc: { type: String, required: true },
   steps: { type: Array, required: true },
-  nextPage: { type: String, required: false } // optional, last chapter may not have next
+  nextPage: { type: String, required: false },
 });
 
 const router = useRouter();

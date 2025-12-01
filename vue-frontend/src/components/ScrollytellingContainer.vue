@@ -18,11 +18,10 @@ let scroller: ReturnType<typeof scrollama> | null = null;
 
 function sendToIframe(slideIndex: number) {
   if (iframe.value && iframe.value.contentWindow) {
-    // Use Reveal.js postMessage API
     iframe.value.contentWindow.postMessage(
       JSON.stringify({
         method: 'slide',
-        args: [slideIndex] // Reveal.js expects slide index
+        args: [slideIndex]
       }),
       "*"
     );
@@ -103,9 +102,11 @@ onBeforeUnmount(() => {
 .story {
   display: flex;
   flex-direction: column;
-  gap: 5vh; /* pacing for scroll */
+  gap: 50vh; /* pacing for scroll */
   padding-top: 50vh;
   padding-bottom: 50vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
 }
 
 .story-step {

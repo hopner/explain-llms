@@ -50,3 +50,11 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     </div>
   </div>
 </template>
+
+<style>
+.h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
