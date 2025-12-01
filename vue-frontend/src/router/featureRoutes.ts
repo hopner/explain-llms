@@ -7,6 +7,10 @@ export function featureToRoute(featureId: string): string {
         '2gram': 'DiGram',
         'digram': 'DiGram',
         '2-gram': 'DiGram',
+        'readbook': 'ReadBook',
+        'read-book': 'ReadBook',
+        'read_book': 'ReadBook',
+        
     }
     if (map[id]) return map[id]
     return 'Example'

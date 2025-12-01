@@ -1,0 +1,57 @@
+{
+  "slides": [
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/ReadBookScene/2263c75181d73fb693b015f3c02b86d4598dd8fd6cf625c8c908146460280349.mp4",
+      "rev_file": "slides/files/ReadBookScene/2263c75181d73fb693b015f3c02b86d4598dd8fd6cf625c8c908146460280349_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/ReadBookScene/816d80bf93281743bf28d126340953b0da610a3cd63a3d3f5601907d9da2c155.mp4",
+      "rev_file": "slides/files/ReadBookScene/816d80bf93281743bf28d126340953b0da610a3cd63a3d3f5601907d9da2c155_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/ReadBookScene/3150175a631f17d72148cca81a11d9f8947c68354f6bda6e6734ffaec59e07f3.mp4",
+      "rev_file": "slides/files/ReadBookScene/3150175a631f17d72148cca81a11d9f8947c68354f6bda6e6734ffaec59e07f3_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/ReadBookScene/3f5f2ea5af1bfd413604d05015f5b2dc681dc79fd653ffc39b15e0a637281641.mp4",
+      "rev_file": "slides/files/ReadBookScene/3f5f2ea5af1bfd413604d05015f5b2dc681dc79fd653ffc39b15e0a637281641_reversed.mp4"
+    }
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "background_color": "black"
+}
