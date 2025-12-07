@@ -5,6 +5,7 @@ import Builder from '../views/Builder.vue'
 import ChapterOverview from '../views/ChapterOverview.vue'
 import ExampleChapter from '../views/ExampleChapter.vue'
 import ReadBook from '../views/chapters/ReadBook.vue'
+import MoreData from '../views/chapters/MoreData.vue'
 import OneGram from '../views/chapters/OneGram.vue'
 import DiGram from '../views/chapters/DiGram.vue'
 
@@ -17,6 +18,7 @@ export default createRouter({
     { path: '/chapter-overview', name: 'ChapterOverview', component: ChapterOverview },
     { path: '/example', name: 'Example', component: ExampleChapter },
     { path: '/chapters/readbook', name: 'ReadBook', component: ReadBook },
+    { path: '/chapters/moredata', name: 'MoreData', component: MoreData },
     { path: '/chapters/onegram', name: 'OneGram', component: OneGram },
     { path: '/chapters/digram', name: 'DiGram', component: DiGram }
   ]

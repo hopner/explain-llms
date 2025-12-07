@@ -10,6 +10,7 @@ export function featureToRoute(featureId: string): string {
         'readbook': 'ReadBook',
         'read-book': 'ReadBook',
         'read_book': 'ReadBook',
+        'read_another': 'MoreData',
         
     }
     if (map[id]) return map[id]
