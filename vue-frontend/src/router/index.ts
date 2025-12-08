@@ -8,6 +8,7 @@ import ReadBook from '../views/chapters/ReadBook.vue'
 import MoreData from '../views/chapters/MoreData.vue'
 import OneGram from '../views/chapters/OneGram.vue'
 import DiGram from '../views/chapters/DiGram.vue'
+import TriGram from '../views/chapters/TriGram.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -20,6 +21,7 @@ export default createRouter({
     { path: '/chapters/readbook', name: 'ReadBook', component: ReadBook },
     { path: '/chapters/moredata', name: 'MoreData', component: MoreData },
     { path: '/chapters/onegram', name: 'OneGram', component: OneGram },
-    { path: '/chapters/digram', name: 'DiGram', component: DiGram }
+    { path: '/chapters/digram', name: 'DiGram', component: DiGram },
+    { path: '/chapters/trigram', name: 'TriGram', component: TriGram }
   ]
 })

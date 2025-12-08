@@ -1,0 +1,81 @@
+{
+  "slides": [
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/22e084e4132eb9f81b10fc00e57cfa4bfed371af86a177dba254471292603739.mp4",
+      "rev_file": "slides/files/TriGramScene/22e084e4132eb9f81b10fc00e57cfa4bfed371af86a177dba254471292603739_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/a3e616721d2bd1699f096f3b0e48ae449e23b0f1f08007c44c3a0c64ba18c074.mp4",
+      "rev_file": "slides/files/TriGramScene/a3e616721d2bd1699f096f3b0e48ae449e23b0f1f08007c44c3a0c64ba18c074_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/1697b54422b4c7d59b83b3ceea5ce118c6510b9012c0aadca25b1c09ec0dab79.mp4",
+      "rev_file": "slides/files/TriGramScene/1697b54422b4c7d59b83b3ceea5ce118c6510b9012c0aadca25b1c09ec0dab79_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/0dea5758979e3ad12a326051b13a6ec7e44cb3741320521ae4792e0d019bd551.mp4",
+      "rev_file": "slides/files/TriGramScene/0dea5758979e3ad12a326051b13a6ec7e44cb3741320521ae4792e0d019bd551_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/5053b3a5acabb42e2222df6ea826b55b39acfbd00c62340579a2e9c2b508b3eb.mp4",
+      "rev_file": "slides/files/TriGramScene/5053b3a5acabb42e2222df6ea826b55b39acfbd00c62340579a2e9c2b508b3eb_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TriGramScene/132119060078dd31d9130d6a4faf379168d07a7f3e991162d2fe24b24c1675a0.mp4",
+      "rev_file": "slides/files/TriGramScene/132119060078dd31d9130d6a4faf379168d07a7f3e991162d2fe24b24c1675a0_reversed.mp4"
+    }
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "background_color": "black"
+}
