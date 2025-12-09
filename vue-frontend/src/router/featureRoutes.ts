@@ -14,6 +14,7 @@ export function featureToRoute(featureId: string): string {
         'read-book': 'ReadBook',
         'read_book': 'ReadBook',
         'read_another': 'MoreData',
+        'tokenization': 'Tokenization'
         
     }
     if (map[id]) return map[id]

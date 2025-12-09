@@ -1,0 +1,93 @@
+{
+  "slides": [
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/11e6c3ebd1a6cbcc7cc316b1b6fa314ac7ec3a8f03c8df5a13762df6d30e474c.mp4",
+      "rev_file": "slides/files/TokenizationScene/11e6c3ebd1a6cbcc7cc316b1b6fa314ac7ec3a8f03c8df5a13762df6d30e474c_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/13f30a5370d3bbf2ee393320c4c198b3126e703605c3f0f4e313e59769916744.mp4",
+      "rev_file": "slides/files/TokenizationScene/13f30a5370d3bbf2ee393320c4c198b3126e703605c3f0f4e313e59769916744_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/136745b2c16f1316e8639922f1a0658ff38111319914d6ac8dede703bf610840.mp4",
+      "rev_file": "slides/files/TokenizationScene/136745b2c16f1316e8639922f1a0658ff38111319914d6ac8dede703bf610840_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/91492bb3cfca929bc9232f8b88116ed8011ae8072cad0dfdb490e53365a23369.mp4",
+      "rev_file": "slides/files/TokenizationScene/91492bb3cfca929bc9232f8b88116ed8011ae8072cad0dfdb490e53365a23369_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/3a80d6a17a445c06be8f0091087852cf0147bb18aae2f8d2a2a301d6c81e791b.mp4",
+      "rev_file": "slides/files/TokenizationScene/3a80d6a17a445c06be8f0091087852cf0147bb18aae2f8d2a2a301d6c81e791b_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/77035cc4b23d77dec69a68a65cc7bae4a2962ed0646621990bd3658418602db2.mp4",
+      "rev_file": "slides/files/TokenizationScene/77035cc4b23d77dec69a68a65cc7bae4a2962ed0646621990bd3658418602db2_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/TokenizationScene/16e1d92e991ca642e212460ea963c740f4514f813cf0ffa634c337c5df528980.mp4",
+      "rev_file": "slides/files/TokenizationScene/16e1d92e991ca642e212460ea963c740f4514f813cf0ffa634c337c5df528980_reversed.mp4"
+    }
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "background_color": "black"
+}

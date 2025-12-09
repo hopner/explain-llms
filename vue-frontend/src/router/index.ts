@@ -9,6 +9,7 @@ import MoreData from '../views/chapters/MoreData.vue'
 import OneGram from '../views/chapters/OneGram.vue'
 import DiGram from '../views/chapters/DiGram.vue'
 import TriGram from '../views/chapters/TriGram.vue'
+import Tokenization from '../views/chapters/Tokenization.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -22,6 +23,7 @@ export default createRouter({
     { path: '/chapters/moredata', name: 'MoreData', component: MoreData },
     { path: '/chapters/onegram', name: 'OneGram', component: OneGram },
     { path: '/chapters/digram', name: 'DiGram', component: DiGram },
-    { path: '/chapters/trigram', name: 'TriGram', component: TriGram }
+    { path: '/chapters/trigram', name: 'TriGram', component: TriGram },
+    { path: '/chapters/tokenization', name: 'Tokenization', component: Tokenization }
   ]
 })
