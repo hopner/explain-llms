@@ -8,6 +8,8 @@ export function featureToRoute(featureId: string): string {
         'digram': 'DiGram',
         '2-gram': 'DiGram',
         '3gram': 'TriGram',
+        'weighted_random': 'WeightedRandom',
+        'weighted-random': 'WeightedRandom',
         'trigram': 'TriGram',
         '3-gram': 'TriGram',
         'readbook': 'ReadBook',

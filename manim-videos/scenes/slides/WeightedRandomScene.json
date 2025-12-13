@@ -1,0 +1,57 @@
+{
+  "slides": [
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/WeightedRandomScene/c22f9dfe13d137436b3e45d392b1364f7608a52ab13ef4e1a1bb2bc188100b13.mp4",
+      "rev_file": "slides/files/WeightedRandomScene/c22f9dfe13d137436b3e45d392b1364f7608a52ab13ef4e1a1bb2bc188100b13_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/WeightedRandomScene/7cc49ddad2a932052d057f0e74bdab65514184971c149e17096962a998224250.mp4",
+      "rev_file": "slides/files/WeightedRandomScene/7cc49ddad2a932052d057f0e74bdab65514184971c149e17096962a998224250_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/WeightedRandomScene/05e38bb4369e35aff26e7956ee8597942a2a8bd96378f6b6c6f8332a4fa47d14.mp4",
+      "rev_file": "slides/files/WeightedRandomScene/05e38bb4369e35aff26e7956ee8597942a2a8bd96378f6b6c6f8332a4fa47d14_reversed.mp4"
+    },
+    {
+      "loop": false,
+      "auto_next": false,
+      "playback_rate": 1.0,
+      "reversed_playback_rate": 1.0,
+      "notes": "",
+      "dedent_notes": true,
+      "skip_animations": false,
+      "src": null,
+      "file": "slides/files/WeightedRandomScene/b24a0600085dd6949b0a3a35049c0c8d536d7ba5ee3410389aab2ea439a4c923.mp4",
+      "rev_file": "slides/files/WeightedRandomScene/b24a0600085dd6949b0a3a35049c0c8d536d7ba5ee3410389aab2ea439a4c923_reversed.mp4"
+    }
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "background_color": "black"
+}

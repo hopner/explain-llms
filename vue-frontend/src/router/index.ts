@@ -9,6 +9,7 @@ import MoreData from '../views/chapters/MoreData.vue'
 import OneGram from '../views/chapters/OneGram.vue'
 import DiGram from '../views/chapters/DiGram.vue'
 import TriGram from '../views/chapters/TriGram.vue'
+import WeightedRandom from '../views/chapters/WeightedRandom.vue'
 import Tokenization from '../views/chapters/Tokenization.vue'
 import NLTK from '../views/chapters/NLTK.vue'
 
@@ -25,6 +26,7 @@ export default createRouter({
     { path: '/chapters/onegram', name: 'OneGram', component: OneGram },
     { path: '/chapters/digram', name: 'DiGram', component: DiGram },
     { path: '/chapters/trigram', name: 'TriGram', component: TriGram },
+    { path: '/chapters/weighted-random', name: 'WeightedRandom', component: WeightedRandom },
     { path: '/chapters/tokenization', name: 'Tokenization', component: Tokenization },
     { path: '/chapters/nltk', name: 'NLTK', component: NLTK }
   ]
