@@ -1,6 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from django.shortcuts import get_object_or_404
+import os
+import json
 
 from .predictors.pipeline import PredictionPipeline
 from .predictors.tokenizer import Tokenizer
@@ -32,7 +35,7 @@ class AddFeatureView(APIView):
         pipeline = PredictionPipeline(config=updated_config, pretrained_model=pretrained_model)
         model_json = pipeline.get_model()
 
-        return Response({'model': model_json})
+        return Response({'model': model_json}, status=status.HTTP_200_OK)
     
 class RemoveFeatureView(APIView):
     def post(self, request):
@@ -154,3 +157,32 @@ class TokenizeView(APIView):
         except Exception as e:
             return Response({'error': f'Tokenization failed: {str(e)}'}, status=400)
         return Response({'tokens': tokens})
+
+class BooksDatasetView(APIView):
+    def get(self, request):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(base_dir, 'predictors', 'data', 'book_info.json')
+
+        try:
+            with open(json_path, 'r') as f:
+                book_data = json.load(f)
+        except Exception as e:
+            return Response({'error': f'Failed to load book data: {str(e)}'}, status=500)
+        return Response(book_data)
+    
+class SetCorpusView(APIView):
+    def post(self, request):
+        guid = request.COOKIES.get('user_guid')
+        if not guid:
+            return Response({'error': 'User GUID cookie not found'}, status=400)
+        
+        user = get_object_or_404(User, guid=guid)
+        corpus_ids = request.data.get('ids', [])
+        if not isinstance(corpus_ids, list):
+            return Response({'error': 'Invalid corpus ids'}, status=400)
+        
+        user.model_config["knowledge"] = [{"id": cid} for cid in corpus_ids]
+        user.save()
+        retrain_response = TrainView().post(request)
+        model = retrain_response.data.get('model', {})
+        return Response({'status': 'Corpus updated and model retrained', 'model': model}, status=status.HTTP_200_OK)

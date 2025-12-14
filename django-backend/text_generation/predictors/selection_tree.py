@@ -4,7 +4,7 @@ SELECTION_TREE = {
     "read_book": {
         "read_another": {
             "add_own_text": {
-                "add_own_text": {}
+                "select_corpus": {}
             }
         },
         "1gram": {
@@ -22,10 +22,10 @@ SELECTION_TREE = {
 
 FEATURE_CONFIG_MAP = {
     "read_book": {
-        "knowledge": [{"path": "./text_generation/predictors/data/moby_dick.txt"}]
+        "knowledge": [{"id": "moby_dick"}]
     },
     "read_another": {
-        "knowledge": [{"path": "./text_generation/predictors/data/alice.txt"}]
+        "knowledge": [{"id": "alice"}]
     },
     "add_own_text": {
         "knowledge": []

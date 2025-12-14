@@ -1,3 +1,6 @@
+import os
+import json
+
 from .random_predictor import RandomPredictor
 from .ngram_predictor import NGramPredictor
 from .tokenizer import Tokenizer
@@ -27,9 +30,11 @@ class PredictionPipeline:
 
     def load_corpus(self, config: dict):
         corpus = []
+        id_to_path = self._resolve_knowledge_paths()
         knowledge = config.get("knowledge", [])
         for entry in knowledge:
-            path = entry.get("path")
+            bid = entry.get("id")
+            path = id_to_path.get(bid)
             if not path:
                 continue
             try:
@@ -53,9 +58,9 @@ class PredictionPipeline:
         if pretrained_tokenizer != current_tokenizer:
             return False
         
-        pretrained_files = model.get("knowledge_files", [])
-        current_files = [entry.get("path") for entry in self.config.get("knowledge", []) if entry.get("path")]
-        if sorted(pretrained_files) != sorted(current_files):
+        pretrained_ids = model.get("knowledge", [])
+        current_ids = [entry.get("id") for entry in self.config.get("knowledge", []) if entry.get("id")]
+        if sorted(pretrained_ids) != sorted(current_ids):
             return False
         
         return True
@@ -74,3 +79,20 @@ class PredictionPipeline:
         elif isinstance(self.predictor, RandomPredictor):
             return {"vocab": self.predictor.corpus_vocab or self.predictor.vocabulary}
         return {}
+    
+    def _resolve_knowledge_paths(self) -> dict:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(base_dir, 'data', 'book_info.json')
+        try:
+            with open(json_path, 'r') as f:
+                book_data = json.load(f)
+        except FileNotFoundError:
+            print(f"Warning: Knowledge file {json_path} not found.")
+            return {}
+        mapping = {}
+        for item in book_data.get('library', []):
+            bid = item.get('id')
+            path = item.get('path')
+            if bid and path:
+                mapping[bid] = path
+        return mapping

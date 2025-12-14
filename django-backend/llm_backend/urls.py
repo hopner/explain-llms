@@ -22,7 +22,9 @@ from text_generation.views import (PredictView,
                                    AvailableFeaturesView, 
                                    TrainView, 
                                    SkillTreeView,
-                                   TokenizeView)
+                                   TokenizeView,
+                                   BooksDatasetView,
+                                   SetCorpusView)
 from users.views import UserCreateView, UserConfigView
 
 urlpatterns = [
@@ -36,4 +38,6 @@ urlpatterns = [
     path('api/skill-tree/', SkillTreeView.as_view()),
     path('api/train/', TrainView.as_view()),
     path('api/tokenize/', TokenizeView.as_view()),
+    path('api/books-dataset/', BooksDatasetView.as_view()),
+    path('api/set-corpus/', SetCorpusView.as_view()),
 ]
