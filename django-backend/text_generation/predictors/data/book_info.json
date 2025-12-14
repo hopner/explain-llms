@@ -1,0 +1,58 @@
+{
+    "library": [
+        {
+            "id": "alice",
+            "title": "Alice's Adventures in Wonderland",
+            "author": "Lewis Carroll",
+            "path": "./text_generation/predictors/data/alice.txt"
+        },
+        {
+            "id": "frankstein",
+            "title": "Frankenstein; Or, The Modern Prometheus",
+            "author": "Mary Wollstonecraft Shelley",
+            "path": "./text_generation/predictors/data/frankstein.txt"
+        },
+        {
+            "id": "jekyll_hyde",
+            "title": "Strange Case of Dr Jekyll and Mr Hyde",
+            "author": "Robert Louis Stevenson",
+            "path": "./text_generation/predictors/data/jekyll_and_hyde.txt"
+        },
+        {
+            "id": "les_miserables",
+            "title": "Les Misérables",
+            "author": "Victor Hugo",
+            "path": "./text_generation/predictors/data/les_miserables.txt"
+        },
+        {
+            "id": "moby_dick",
+            "title": "Moby Dick; Or, The Whale",
+            "author": "Herman Melville",
+            "path": "./text_generation/predictors/data/moby_dick.txt"
+        },
+        {
+            "id": "monte_cristo",
+            "title": "The Count of Monte Cristo",
+            "author": "Alexandre Dumas",
+            "path": "./text_generation/predictors/data/monte_cristo.txt"
+        },
+        {
+            "id": "odyssey",
+            "title": "The Odyssey",
+            "author": "Homer",
+            "path": "./text_generation/predictors/data/odyssey.txt"
+        },
+        {
+            "id": "pride_prejudice",
+            "title": "Pride and Prejudice",
+            "author": "Jane Austen",
+            "path": "./text_generation/predictors/data/pride_and_prejudice.txt"
+        },
+        {
+            "id": "romeo_and_juliet",
+            "title": "Romeo and Juliet",
+            "author": "William Shakespeare",
+            "path": "./text_generation/predictors/data/romeo_and_juliet.txt"
+        }
+    ]
+}
