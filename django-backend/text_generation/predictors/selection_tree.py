@@ -3,9 +3,7 @@ from .utils import merge_dicts
 SELECTION_TREE = {
     "read_book": {
         "read_another": {
-            "add_own_text": {
-                "select_corpus": {}
-            }
+            "select_corpus": {}
         },
         "1gram": {
             "2gram": {
@@ -27,8 +25,7 @@ FEATURE_CONFIG_MAP = {
     "read_another": {
         "knowledge": [{"id": "alice"}]
     },
-    "add_own_text": {
-        "knowledge": []
+    "select_corpus": {
     },
     "1gram": {
         "capabilities": {"previous": {"enabled": True, "depth": 1}}

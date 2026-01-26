@@ -90,7 +90,7 @@ class PredictionPipeline:
             print(f"Warning: Knowledge file {json_path} not found.")
             return {}
         mapping = {}
-        for item in book_data.get('library', []):
+        for item in book_data:
             bid = item.get('id')
             path = item.get('path')
             if bid and path:

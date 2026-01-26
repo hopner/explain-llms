@@ -163,12 +163,21 @@ class BooksDatasetView(APIView):
         base_dir = os.path.dirname(os.path.abspath(__file__))
         json_path = os.path.join(base_dir, 'predictors', 'data', 'book_info.json')
 
+        guid = request.COOKIES.get('user_guid')
+        user = get_object_or_404(User, guid=guid) if guid else None
+        active_corpus = user.model_config.get('knowledge', []) if user else []
+        active_ids = [item.get('id') for item in active_corpus if isinstance(item, dict)]
+
         try:
             with open(json_path, 'r') as f:
                 book_data = json.load(f)
         except Exception as e:
             return Response({'error': f'Failed to load book data: {str(e)}'}, status=500)
-        return Response(book_data)
+        
+        return Response({
+            'books': book_data if isinstance(book_data, list) else book_data.get('books', []),
+            'active_corpus': active_ids
+        })
     
 class SetCorpusView(APIView):
     def post(self, request):
@@ -183,6 +192,9 @@ class SetCorpusView(APIView):
         
         user.model_config["knowledge"] = [{"id": cid} for cid in corpus_ids]
         user.save()
-        retrain_response = TrainView().post(request)
-        model = retrain_response.data.get('model', {})
+
+        config = user.model_config or {}
+        pipeline = PredictionPipeline(config=config, pretrained_model=None)
+        model = pipeline.get_model()
+
         return Response({'status': 'Corpus updated and model retrained', 'model': model}, status=status.HTTP_200_OK)
