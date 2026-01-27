@@ -35,7 +35,7 @@ class AddFeatureView(APIView):
         pipeline = PredictionPipeline(config=updated_config, pretrained_model=pretrained_model)
         model_json = pipeline.get_model()
 
-        return Response({'model': model_json}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
     
 class RemoveFeatureView(APIView):
     def post(self, request):
@@ -79,7 +79,7 @@ class RemoveFeatureView(APIView):
         pipeline = PredictionPipeline(config=new_config, pretrained_model=pretrained_model)
         model_json = pipeline.get_model()
 
-        return Response({'model': model_json, 'removed_features': list(removed_features)})
+        return Response({'removed_features': list(removed_features)})
 
     
 
@@ -116,10 +116,8 @@ class TrainView(APIView):
         
         user = get_object_or_404(User, guid=guid)
         config = user.model_config or {}
-        
-        pretrained_model = request.data.get('model')
 
-        pipeline = PredictionPipeline(config=config, pretrained_model=pretrained_model)
+        pipeline = PredictionPipeline(config=config)
         model_json = pipeline.get_model()
 
         return Response({'model': model_json})
@@ -136,13 +134,11 @@ class PredictView(APIView):
         
         user = get_object_or_404(User, guid=guid)
         config = user.model_config or {}
-
-        pretrained_model = request.data.get('model')
         
-        pipeline = PredictionPipeline(config=config, pretrained_model=pretrained_model)
+        pipeline = PredictionPipeline(config=config)
         prediction = pipeline.predict(prompt)
-        model_json = pipeline.get_model()
-        return Response({'prediction': prediction, 'model': model_json})
+
+        return Response({'prediction': prediction})
     
 
 class TokenizeView(APIView):
@@ -161,7 +157,7 @@ class TokenizeView(APIView):
 class BooksDatasetView(APIView):
     def get(self, request):
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        json_path = os.path.join(base_dir, 'predictors', 'data', 'book_info.json')
+        json_path = os.path.join(base_dir, 'predictors', 'data', 'temp_book_info.json')
 
         guid = request.COOKIES.get('user_guid')
         user = get_object_or_404(User, guid=guid) if guid else None
@@ -194,7 +190,6 @@ class SetCorpusView(APIView):
         user.save()
 
         config = user.model_config or {}
-        pipeline = PredictionPipeline(config=config, pretrained_model=None)
-        model = pipeline.get_model()
+        pipeline = PredictionPipeline(config=config)
 
-        return Response({'status': 'Corpus updated and model retrained', 'model': model}, status=status.HTTP_200_OK)
+        return Response({'status': 'Corpus updated and model retrained'}, status=status.HTTP_200_OK)

@@ -40,7 +40,7 @@ FEATURE_CONFIG_MAP = {
         "capabilities": {"previous": {"mode": "weighted"}}
     },
     "tokenization": {
-        "capabilities": {"tokenizer": {"type": "nltk"}}
+        "capabilities": {"tokenizer": {"type": "regex"}}
     },
     "nltk": {
         "capabilities": {"tokenizer": {"type": "nltk"}}

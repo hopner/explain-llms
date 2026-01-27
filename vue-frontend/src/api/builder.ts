@@ -1,41 +1,5 @@
 import { predict } from './predictor'
 
-const MAX_STORAGE_SIZE = 10 * 1024 * 1024 // 5 MB
-
-function canStoreModel(modelJson: string): boolean {
-  try {
-    const currentSize = JSON.stringify(localStorage).length
-    const newSize = modelJson.length
-    return (currentSize + newSize) < MAX_STORAGE_SIZE
-  } catch {
-    return false
-  }
-}
-
-function safeStoreModel(model: any): void {
-  try {
-    const modelJson = JSON.stringify(model)
-    if (canStoreModel(modelJson)) {
-      localStorage.setItem('trainedModel', modelJson)
-    } else {
-      console.warn('Model too large to store in localStorage')
-      // Optionally clear old data and retry
-      localStorage.removeItem('trainedModel')
-      localStorage.setItem('trainedModel', modelJson)
-    }
-  } catch (e) {
-    if (e instanceof DOMException && e.code === 22) {
-      console.error('localStorage quota exceeded, clearing old model')
-      localStorage.removeItem('trainedModel')
-      try {
-        localStorage.setItem('trainedModel', JSON.stringify(model))
-      } catch {
-        console.error('Still cannot store model after clearing')
-      }
-    }
-  }
-}
-
 export async function fetchPrediction(prompt: string): Promise<string> {
   return predict(prompt)
 }
@@ -78,11 +42,6 @@ export async function addFeatureToConfig(featureId: string): Promise<void> {
   })
 
   if (!response.ok) throw new Error('Add feature API error')
-
-  const data = await response.json()
-  if (data.model) {
-    safeStoreModel(data.model)
-  }
 }
 
 export async function removeFeatureFromConfig(featureId: string): Promise<string[]> {
@@ -96,10 +55,7 @@ export async function removeFeatureFromConfig(featureId: string): Promise<string
   if (!response.ok) throw new Error('Remove feature API error')
 
   const data = await response.json()
-  if (data.model) {
-    safeStoreModel(data.model)
-  }
-  return data.removed_features
+  return data.removed_features || []
 }
 
 export async function fetchBooksDataset() {
@@ -120,8 +76,5 @@ export async function setCorpus(bookIds: string[]) {
   if (!response.ok) throw new Error('Failed to set corpus')
 
   const data = await response.json()
-  if (data.model) {
-    safeStoreModel(data.model)
-  }
   return data
 }

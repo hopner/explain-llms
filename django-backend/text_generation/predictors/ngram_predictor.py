@@ -65,8 +65,10 @@ class NGramPredictor(Predictor):
     def _get_vocabulary(self) -> list[str]:
         """Collects all possible next tokens from the model."""
         vocab = set()
-        for options in self.model.get("counts", {}).values():
-            vocab.update(options.keys())
+        counts = self.model.get("counts", {})
+        for ctx_to_counter in counts.values():
+            for counter in ctx_to_counter.values():
+                vocab.update(counter.keys())
         return list(vocab)
     
     
