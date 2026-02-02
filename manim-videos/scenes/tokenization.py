@@ -105,11 +105,11 @@ class TokenizationScene(Slide):
             FadeOut(split_dot)
         )
 
-        example_word = Text("unbelievable", font="Times New Roman").move_to(ORIGIN + LEFT*2)
+        example_word = Text("unthinkable", font="Times New Roman").move_to(ORIGIN + LEFT*2)
 
         self.play(Write(example_word))
 
-        middle = Text("believe", font="Times New Roman").move_to(ORIGIN + RIGHT*3)
+        middle = Text("think", font="Times New Roman").move_to(ORIGIN + RIGHT*3)
         prefix = Text("un", font="Times New Roman").next_to(middle, UP)
         suffix = Text("able", font="Times New Roman").next_to(middle, DOWN)
 
