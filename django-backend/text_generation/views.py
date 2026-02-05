@@ -1,6 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from django.shortcuts import get_object_or_404
+import os
+import json
 
 from .predictors.pipeline import PredictionPipeline
 from .predictors.tokenizer import Tokenizer
@@ -32,7 +35,7 @@ class AddFeatureView(APIView):
         pipeline = PredictionPipeline(config=updated_config, pretrained_model=pretrained_model)
         model_json = pipeline.get_model()
 
-        return Response({'model': model_json})
+        return Response(status=status.HTTP_200_OK)
     
 class RemoveFeatureView(APIView):
     def post(self, request):
@@ -76,7 +79,7 @@ class RemoveFeatureView(APIView):
         pipeline = PredictionPipeline(config=new_config, pretrained_model=pretrained_model)
         model_json = pipeline.get_model()
 
-        return Response({'model': model_json, 'removed_features': list(removed_features)})
+        return Response({'removed_features': list(removed_features)})
 
     
 
@@ -113,10 +116,8 @@ class TrainView(APIView):
         
         user = get_object_or_404(User, guid=guid)
         config = user.model_config or {}
-        
-        pretrained_model = request.data.get('model')
 
-        pipeline = PredictionPipeline(config=config, pretrained_model=pretrained_model)
+        pipeline = PredictionPipeline(config=config)
         model_json = pipeline.get_model()
 
         return Response({'model': model_json})
@@ -133,13 +134,11 @@ class PredictView(APIView):
         
         user = get_object_or_404(User, guid=guid)
         config = user.model_config or {}
-
-        pretrained_model = request.data.get('model')
         
-        pipeline = PredictionPipeline(config=config, pretrained_model=pretrained_model)
+        pipeline = PredictionPipeline(config=config)
         prediction = pipeline.predict(prompt)
-        model_json = pipeline.get_model()
-        return Response({'prediction': prediction, 'model': model_json})
+
+        return Response({'prediction': prediction})
     
 
 class TokenizeView(APIView):
@@ -154,3 +153,43 @@ class TokenizeView(APIView):
         except Exception as e:
             return Response({'error': f'Tokenization failed: {str(e)}'}, status=400)
         return Response({'tokens': tokens})
+
+class BooksDatasetView(APIView):
+    def get(self, request):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(base_dir, 'predictors', 'data', 'book_info.json')
+
+        guid = request.COOKIES.get('user_guid')
+        user = get_object_or_404(User, guid=guid) if guid else None
+        active_corpus = user.model_config.get('knowledge', []) if user else []
+        active_ids = [item.get('id') for item in active_corpus if isinstance(item, dict)]
+
+        try:
+            with open(json_path, 'r') as f:
+                book_data = json.load(f)
+        except Exception as e:
+            return Response({'error': f'Failed to load book data: {str(e)}'}, status=500)
+        
+        return Response({
+            'books': book_data if isinstance(book_data, list) else book_data.get('books', []),
+            'active_corpus': active_ids
+        })
+    
+class SetCorpusView(APIView):
+    def post(self, request):
+        guid = request.COOKIES.get('user_guid')
+        if not guid:
+            return Response({'error': 'User GUID cookie not found'}, status=400)
+        
+        user = get_object_or_404(User, guid=guid)
+        corpus_ids = request.data.get('ids', [])
+        if not isinstance(corpus_ids, list):
+            return Response({'error': 'Invalid corpus ids'}, status=400)
+        
+        user.model_config["knowledge"] = [{"id": cid} for cid in corpus_ids]
+        user.save()
+
+        config = user.model_config or {}
+        pipeline = PredictionPipeline(config=config)
+
+        return Response({'status': 'Corpus updated and model retrained'}, status=status.HTTP_200_OK)

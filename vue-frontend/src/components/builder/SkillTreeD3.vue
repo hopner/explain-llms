@@ -4,6 +4,7 @@ import { onMounted, ref, watch, nextTick } from 'vue'
 import { fetchSkillTree, addFeatureToConfig, removeFeatureFromConfig } from '../../api/builder'
 import { useRouter } from 'vue-router'
 import { featureToRoute } from '../../router/featureRoutes'
+import CorpusSelection from './CorpusSelection.vue'
 
 const props = defineProps<{
     boundingBox?: { width: number; height: number }
@@ -14,6 +15,8 @@ const svgRef = ref<SVGSVGElement | null>(null)
 const data = ref<any>(null)
 const router = useRouter()
 const error = ref<string | null>(null)
+
+const showCorpusModal = ref(false)
 
 const LAYOUT = {
     width: 1000,
@@ -144,12 +147,23 @@ function drawTree(treeData: any) {
 
 async function selectAlternative(featureId: string) {
     try {
+        if (featureId === 'select_corpus') {
+            showCorpusModal.value = true
+            return
+        }
+
         const routeName = featureToRoute(featureId)
         router.push({ name: routeName })
         await addFeatureToConfig(featureId)
     } catch (e) {
         error.value = 'Could not add improvement.'
     }
+}
+
+async function handleCorpusSubmit() {
+    data.value = await fetchSkillTree()
+    await nextTick()
+    drawTree(data.value)
 }
 
 async function removeSelected(featureId: string) {
@@ -172,6 +186,7 @@ async function removeSelected(featureId: string) {
 <template>
     <div class="flex justify-center p-8">
         <svg ref="svgRef"></svg>
+        <CorpusSelection v-if="showCorpusModal" @close="showCorpusModal = false" @submit="handleCorpusSubmit" />
     </div>
 </template>
 

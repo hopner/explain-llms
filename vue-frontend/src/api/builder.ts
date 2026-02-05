@@ -42,11 +42,6 @@ export async function addFeatureToConfig(featureId: string): Promise<void> {
   })
 
   if (!response.ok) throw new Error('Add feature API error')
-
-  const data = await response.json()
-  if (data.model) {
-    localStorage.setItem('trainedModel', JSON.stringify(data.model))
-  }
 }
 
 export async function removeFeatureFromConfig(featureId: string): Promise<string[]> {
@@ -60,8 +55,26 @@ export async function removeFeatureFromConfig(featureId: string): Promise<string
   if (!response.ok) throw new Error('Remove feature API error')
 
   const data = await response.json()
-  if (data.model) {
-    localStorage.setItem('trainedModel', JSON.stringify(data.model))
-  }
-  return data.removed_features
+  return data.removed_features || []
+}
+
+export async function fetchBooksDataset() {
+  const response = await fetch(`/api/books-dataset/`, {
+    credentials: 'include'
+  })
+  if (!response.ok) throw new Error('Failed to fetch books')
+  return response.json()
+}
+
+export async function setCorpus(bookIds: string[]) {
+  const response = await fetch(`/api/set-corpus/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ ids: bookIds })
+  })
+  if (!response.ok) throw new Error('Failed to set corpus')
+
+  const data = await response.json()
+  return data
 }

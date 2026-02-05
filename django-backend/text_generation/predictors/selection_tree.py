@@ -3,9 +3,7 @@ from .utils import merge_dicts
 SELECTION_TREE = {
     "read_book": {
         "read_another": {
-            "add_own_text": {
-                "add_own_text": {}
-            }
+            "select_corpus": {}
         },
         "1gram": {
             "2gram": {
@@ -22,13 +20,12 @@ SELECTION_TREE = {
 
 FEATURE_CONFIG_MAP = {
     "read_book": {
-        "knowledge": [{"path": "./text_generation/predictors/data/moby_dick.txt"}]
+        "knowledge": [{"id": "moby_dick"}]
     },
     "read_another": {
-        "knowledge": [{"path": "./text_generation/predictors/data/alice.txt"}]
+        "knowledge": [{"id": "alice"}]
     },
-    "add_own_text": {
-        "knowledge": []
+    "select_corpus": {
     },
     "1gram": {
         "capabilities": {"previous": {"enabled": True, "depth": 1}}
@@ -43,7 +40,7 @@ FEATURE_CONFIG_MAP = {
         "capabilities": {"previous": {"mode": "weighted"}}
     },
     "tokenization": {
-        "capabilities": {"tokenizer": {"type": "nltk"}}
+        "capabilities": {"tokenizer": {"type": "regex"}}
     },
     "nltk": {
         "capabilities": {"tokenizer": {"type": "nltk"}}

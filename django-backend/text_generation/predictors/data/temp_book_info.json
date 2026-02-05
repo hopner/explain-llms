@@ -1,0 +1,14 @@
+[
+    {
+        "id": "alice",
+        "title": "Alice's Adventures in Wonderland",
+        "author": "Lewis Carroll",
+        "path": "./text_generation/predictors/data/alice.txt"
+    },
+    {
+        "id": "moby_dick",
+        "title": "Moby Dick; Or, The Whale",
+        "author": "Herman Melville",
+        "path": "./text_generation/predictors/data/moby_dick.txt"
+    }
+]
