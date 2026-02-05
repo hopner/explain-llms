@@ -63,7 +63,20 @@ class MoreDataScene(Slide):
         self.remove(word_boxes)
 
         self.next_slide()
+
         # Slide 3
+        prediction = "the ship".split()
+        prediction_boxes = VGroup(*[make_word_box(word, color=RED) for word in prediction])
+        for i, box in enumerate(prediction_boxes):
+            box.move_to(ai_model.get_center()).scale(0.1)
+            box.set_z_index(10)
+            self.add(box)
+            self.play(box.animate.move_to(ai_model.get_bottom() + DOWN * 0.5 + LEFT + RIGHT * i *2).scale(10), run_time= 0.5)
+
+        self.next_slide()
+        # Slide 4
+
+        self.play(FadeOut(prediction_boxes))
 
         red_text = generate_text_block(lines=5, tokens_per_line=10, color=RED).scale(0.5).to_corner(UL)
         blue_text = generate_text_block(lines=5, tokens_per_line=10, color=BLUE).scale(0.5).to_corner(UR)
@@ -89,7 +102,7 @@ class MoreDataScene(Slide):
         self.remove(red_text, blue_text, green_text, yellow_text)
         self.next_slide()
 
-        # Slide 4
+        # Slide 5
         # Spit out one rectangle at a time to represent generated text
         cols = 10                
         row_buff = 0.06          

@@ -4,11 +4,6 @@ from collections import Counter
 import numpy as np
 from collections import defaultdict, Counter
 import re
-import sys
-
-sys.path.append("./utils")
-
-from MiniChart import MiniChart
 
 
 
@@ -174,7 +169,6 @@ class DiGramScene(Slide):
         self.next_slide()
         
         # Slide 6
-        self.play(FadeOut(chart_group), FadeOut(para), run_time=1.5) 
 
         table_rows = VGroup()
 
@@ -207,6 +201,9 @@ class DiGramScene(Slide):
 
         table_rows.arrange(DOWN, aligned_edge=RIGHT, buff=0.3).scale(1.2)
 
+        top_row = table_rows[0]
+        top_row_bars = top_row[1]
+
         table_rect = Rectangle(
             width=table_rows.width + 0.3,
             height=table_rows.height + 0.3,
@@ -233,8 +230,20 @@ class DiGramScene(Slide):
         )
 
         full_table = VGroup(table_rect, h_lines, v_line, table_rows).center()
+
+        original_top_row_bars_pos = top_row_bars.get_center()
+        top_row_bars.move_to(chart.get_center())
         
-        self.play(Create(full_table), run_time=3)
+        self.play(
+            ReplacementTransform(chart, top_row_bars),
+            FadeOut(para),
+            run_time=2
+        )
+        
+        self.play(
+            ReplacementTransform(label, top_row[0]),
+            top_row_bars.animate.move_to(original_top_row_bars_pos),
+            Create(VGroup(table_rect, h_lines, v_line, *table_rows[1:])), run_time=2)
         self.next_slide()
 
         # Slide 7
