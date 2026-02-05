@@ -157,7 +157,7 @@ class TokenizeView(APIView):
 class BooksDatasetView(APIView):
     def get(self, request):
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        json_path = os.path.join(base_dir, 'predictors', 'data', 'temp_book_info.json')
+        json_path = os.path.join(base_dir, 'predictors', 'data', 'book_info.json')
 
         guid = request.COOKIES.get('user_guid')
         user = get_object_or_404(User, guid=guid) if guid else None

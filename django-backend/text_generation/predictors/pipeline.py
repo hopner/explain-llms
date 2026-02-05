@@ -72,7 +72,7 @@ class PredictionPipeline:
     
     def _resolve_knowledge_paths(self) -> dict:
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        json_path = os.path.join(base_dir, 'data', 'temp_book_info.json')
+        json_path = os.path.join(base_dir, 'data', 'book_info.json')
         try:
             with open(json_path, 'r') as f:
                 book_data = json.load(f)
