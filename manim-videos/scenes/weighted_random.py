@@ -4,7 +4,6 @@ import numpy as np
 
 class WeightedRandomScene(Slide):
     def construct(self):
-        
         # Slide 1 - An histogram gives us the word "the"
 
         colors=[
@@ -26,15 +25,40 @@ class WeightedRandomScene(Slide):
             bar_names=labels,
             y_range=[0, 0.3, 0.05],
             bar_colors=colors,
+        ).move_to(ORIGIN+RIGHT*0.5)
+
+        prompt = Text("The").to_edge(LEFT)
+        prompt_arrow = Arrow(
+            start=prompt.get_right(),
+            end=chart.get_left(),
+            buff=0.1,
         )
+        self.play(
+            Write(prompt),
+            Create(prompt_arrow),
+        )
+
 
         self.play(
             Create(chart),
             run_time=2
         )
+        deterministic_prediction = Text("cat", font_size=36).move_to(chart.bars[0].get_top() + UP*0.5)
+
+        self.play(
+            FadeIn(deterministic_prediction),
+            deterministic_prediction.animate.to_edge(DOWN),
+            run_time=2
+        )
         self.next_slide()
 
         # Slide 2 - Bar chart morphs into a lucky wheel
+
+        self.play(
+            FadeOut(prompt),
+            FadeOut(prompt_arrow),
+            FadeOut(deterministic_prediction),
+        )
 
         sectors = VGroup()
         labels_group = VGroup()
@@ -66,13 +90,13 @@ class WeightedRandomScene(Slide):
             start_angle += angle
 
         wheel = VGroup(sectors, labels_group)
-        wheel.move_to(chart.get_center())
+        wheel.move_to(ORIGIN)
 
         triangle = Triangle(
             fill_color=WHITE,
             fill_opacity=1,
             stroke_width=0
-        ).scale(0.2).rotate(5*PI/4 - PI/2).move_to((2.65) * np.array([
+        ).scale(0.2).rotate(5*PI/4 - PI/2).move_to((3) * np.array([
             np.cos(PI/4),
             np.sin(PI/4),
             0
