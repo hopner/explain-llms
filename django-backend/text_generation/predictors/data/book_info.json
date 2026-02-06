@@ -18,22 +18,10 @@
         "path": "./text_generation/predictors/data/jekyll_and_hyde.txt"
     },
     {
-        "id": "les_miserables",
-        "title": "Les Misérables",
-        "author": "Victor Hugo",
-        "path": "./text_generation/predictors/data/les_miserables.txt"
-    },
-    {
         "id": "moby_dick",
         "title": "Moby Dick; Or, The Whale",
         "author": "Herman Melville",
         "path": "./text_generation/predictors/data/moby_dick.txt"
-    },
-    {
-        "id": "monte_cristo",
-        "title": "The Count of Monte Cristo",
-        "author": "Alexandre Dumas",
-        "path": "./text_generation/predictors/data/monte_cristo.txt"
     },
     {
         "id": "odyssey",
