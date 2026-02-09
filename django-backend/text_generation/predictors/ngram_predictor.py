@@ -46,14 +46,15 @@ class NGramPredictor(Predictor):
             vocab = self._get_vocabulary()
             return random.choice(vocab) if vocab else ""
         
+        mode = self.mode
         max_n = min(self.depth, len(tokens)+1)
         for d in range(max_n, 0, -1):
             context_length = d - 1
             key = " ".join(tokens[-context_length:]) if context_length > 0 else ""
-            options = self.model['counts'].get(d, {}).get(key)
+            options = self.model['counts'].get(str(d), {}).get(key)
 
             if options:
-                if self.mode == 'deterministic':
+                if mode == 'deterministic':
                     return max(options.items(), key=lambda x: x[1])[0]
                 else:
                     words, weights = zip(*options.items())

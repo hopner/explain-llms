@@ -45,3 +45,6 @@ htmlcov/
 .coverage
 .tox/
 .pytest_cache/
+
+# Precomputed models
+/text_generation/predictors/data/precomputed_models/

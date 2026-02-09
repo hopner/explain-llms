@@ -21,17 +21,15 @@ class PredictionPipeline:
             tokenizer_type = config.get("capabilities", {}).get("tokenizer", {}).get("type", "whitespace")
             corpus_ids = [entry.get("id") for entry in config.get("knowledge", []) if entry.get("id")]
 
-            model = model_store.get_model(corpus_ids, tokenizer_type, requested_depth, mode)
+            model = model_store.get_model(corpus_ids, tokenizer_type, requested_depth)
 
             if model is None:
+                print(f"Model not found in store for corpus {corpus_ids}, tokenizer {tokenizer_type}, depth {requested_depth}, mode {mode}. Training new model...")
                 self.predictor = NGramPredictor(depth=requested_depth, mode=mode)
                 self.predictor.train(self.corpus, self.tokenizer)
             else:
-                if isinstance(model, dict):
-                    self.predictor = NGramPredictor(depth=requested_depth, mode=mode)
-                    self.predictor.load(model)
-                else:
-                    self.predictor = model
+                self.predictor = NGramPredictor(depth=requested_depth, mode=mode)
+                self.predictor.load(model)
                 self.predictor.tokenizer = self.tokenizer
         else:
             self.predictor = RandomPredictor()
@@ -58,6 +56,7 @@ class PredictionPipeline:
     
     def predict(self, prompt: str) -> str:
         if self.predictor is None:
+            print("Warning: No predictor available, using fallback random predictor.")
             fallback = RandomPredictor()
             fallback.train(self.corpus, self.tokenizer)
             return fallback.predict(prompt)
