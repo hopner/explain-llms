@@ -59,14 +59,14 @@ function drawTree(treeData: any) {
     svg.selectAll('*').remove() // clear old tree
 
     if (treeData?.status === 'locked') {
-      d3.select(svgRef.value).selectAll('*').remove()
-      return
+        d3.select(svgRef.value).selectAll('*').remove()
+        return
     }
-    
+
     const root = d3.hierarchy(treeData, (d: any) => {
-      if (!Array.isArray(d.children)) return null
-      const visibleChildren = d.children.filter((c: any) => c?.status !== 'locked')
-      return visibleChildren.length ? visibleChildren : null
+        if (!Array.isArray(d.children)) return null
+        const visibleChildren = d.children.filter((c: any) => c?.status !== 'locked')
+        return visibleChildren.length ? visibleChildren : null
     })
 
     const NODE_SPACING = { x: LAYOUT.nodeSpacing.x, y: LAYOUT.nodeSpacing.y }
@@ -94,7 +94,7 @@ function drawTree(treeData: any) {
             .x(d => d.x)
             .y(d => d.y)
         )
-        .attr('stroke', '#888')
+        .attr('stroke', '#215E61')
         .attr('fill', 'none')
 
     const nodes = g.selectAll('.node')
@@ -127,16 +127,16 @@ function drawTree(treeData: any) {
             .attr('height', 30)
             .attr('fill', (() => {
                 switch (d.data.status) {
-                    case 'selected': return '#22c55e'
-                    case 'available': return '#3b82f6'
-                    default: return '#6b7280'
+                    case 'selected': return '#215E61'
+                    case 'available': return '#FE7F2D'
+                    default: return '#D1D5DB'
                 }
             })())
 
         button.append('text')
             .attr('text-anchor', 'middle')
             .attr('alignment-baseline', 'middle')
-            .attr('fill', '#e5e5e5')
+            .attr('fill', '#FFFFFF')
             .attr('font-size', 13)
             .attr('font-weight', 600)
             .text(label)

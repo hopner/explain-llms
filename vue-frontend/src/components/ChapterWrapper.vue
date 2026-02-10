@@ -21,7 +21,7 @@ function goToNextPage() {
 <template>
   <div class="chapter">
     <ScrollytellingContainer :slides-src="slidesSrc" :steps="steps" />
-    <div v-if="nextPage" class="next-page">
+    <div v-if="props.nextPage" class="next-page">
       <button @click="goToNextPage">Next →</button>
     </div>
   </div>
@@ -37,11 +37,13 @@ function goToNextPage() {
 .next-page {
   text-align: center;
   margin: 5rem 0 3rem;
+  position: relative;
+  z-index: 10;
 }
 
 .next-page button {
-  background: #333;
-  color: white;
+  background: #215E61;
+  color: #F5FBE6;
   border: none;
   padding: 1rem 2rem;
   border-radius: 9999px;
@@ -51,7 +53,7 @@ function goToNextPage() {
 }
 
 .next-page button:hover {
-  background: #555;
+  background: #FE7F2D;
   transform: translateY(-2px);
 }
 </style>

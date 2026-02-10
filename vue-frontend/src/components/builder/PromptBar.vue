@@ -10,7 +10,7 @@ async function handleKeydown(e: KeyboardEvent) {
   const target = e.target as HTMLInputElement | null
   const caretAtEnd = !!target && target.selectionStart === target.selectionEnd && target.selectionStart === input.value.length
 
-    if ((e.key === 'ArrowRight' || e.key === 'Tab') && suggestion.value && caretAtEnd) {
+  if ((e.key === 'ArrowRight' || e.key === 'Tab') && suggestion.value && caretAtEnd) {
     e.preventDefault()
     input.value += suggestion.value
     prediction.value = ''
@@ -55,6 +55,26 @@ const emit = defineEmits(['used'])
 </template>
 
 <style scoped>
+input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #215E61;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  color: #233D4D;
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: #215E61;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(254, 127, 45, 0.1);
+}
+
 .input-wrapper {
   position: relative;
   width: 100%;

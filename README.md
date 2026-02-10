@@ -43,3 +43,6 @@ Built with:
     ```bash
     npm run dev
     ```
+
+## Links
+- [Color Palette](https://colorhunt.co/palette/f5fbe6215e61233d4dfe7f2d)

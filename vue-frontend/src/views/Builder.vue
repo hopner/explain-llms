@@ -42,19 +42,73 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 </script>
 
 <template>
-  <div>
-    <h1>Build Your Own AI</h1>
-    <PromptBar @used="handlePromptUsed" />
-    <div id="skill-tree" ref="skillTreeWrapper">
+  <div class="builder-container">
+    <div class="builder-header">
+      <h1>Build Your Own AI</h1>
+      <p class="subtitle">Customize your language model by selecting improvements</p>
+    </div>
+
+    <div class="prompt-section">
+      <PromptBar @used="handlePromptUsed" />
+    </div>
+
+    <div id="skill-tree" ref="skillTreeWrapper" class="skill-tree-wrapper">
       <SkillTreeD3 v-if="showImprovements" :boundingBox="treeBox || undefined" />
     </div>
   </div>
 </template>
 
-<style>
-.h1 {
+<style scoped>
+.builder-container {
+  min-height: 100vh;
+  background: #F5FBE6;
+  color: #233D4D;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.builder-header {
+  padding: 3rem 2rem;
   text-align: center;
-  margin-bottom: 2rem;
-  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 1px solid rgba(33, 94, 97, 0.15);
+  background: #f0f7e6;
+}
+
+.builder-header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #215E61;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 1.125rem;
+  color: #FE7F2D;
+  font-weight: 400;
+}
+
+.prompt-section {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-tree-wrapper {
+  padding: 3rem 2rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .builder-header h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .builder-header {
+    padding: 2rem 1rem;
+  }
 }
 </style>
