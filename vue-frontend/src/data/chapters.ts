@@ -15,6 +15,19 @@ export type ChapterMeta = {
   title: string
   description: string
   routeName: string
+  slidesSrc: string
+  nextPage?: string
+  contentFile: string
+}
+
+export type ChapterStep = {
+  title: string
+  text: string
+  slide: number
+}
+
+export type ChapterContent = ChapterMeta & {
+  steps: ChapterStep[]
 }
 
 export const CHAPTERS: Record<ChapterId, ChapterMeta> = {
@@ -23,60 +36,89 @@ export const CHAPTERS: Record<ChapterId, ChapterMeta> = {
     title: 'Intro',
     description: 'How to use the building page.',
     routeName: 'Intro',
+    slidesSrc: '/slides/Intro.html',
+    nextPage: '/builder',
+    contentFile: '/content/intro.md',
   },
   read_book: {
     id: 'read_book',
     title: 'Read Book',
     description: 'Turning text into a clean training corpus.',
     routeName: 'ReadBook',
+    slidesSrc: '/slides/ReadBook.html',
+    nextPage: '/builder',
+    contentFile: '/content/read_book.md',
   },
   more_data: {
     id: 'more_data',
     title: 'Add More Data',
     description: 'How data size impacts results.',
     routeName: 'MoreData',
+    slidesSrc: '/slides/MoreData.html',
+    nextPage: '/builder',
+    contentFile: '/content/more_data.md',
   },
   weighted_random: {
     id: 'weighted_random',
     title: 'Introduce Randomness',
     description: 'Make more varied predictions based on token distributions.',
     routeName: 'WeightedRandom',
+    slidesSrc: '/slides/weighted_random.html',
+    nextPage: '/builder',
+    contentFile: '/content/weighted_random.md',
   },
   onegram: {
     id: 'onegram',
     title: 'UniGram',
     description: 'Unigram model and token frequency.',
     routeName: 'OneGram',
+    slidesSrc: '/slides/OneGram.html',
+    nextPage: '/builder',
+    contentFile: '/content/onegram.md',
   },
   digram: {
     id: 'digram',
     title: 'DiGram',
     description: 'Bigrams for local context.',
     routeName: 'DiGram',
+    slidesSrc: '/slides/DiGram.html',
+    nextPage: '/builder',
+    contentFile: '/content/digram.md',
   },
   trigram: {
     id: 'trigram',
     title: 'TriGram',
     description: 'Trigrams for richer context.',
     routeName: 'TriGram',
+    slidesSrc: '/slides/TriGram.html',
+    nextPage: '/builder',
+    contentFile: '/content/trigram.md',
   },
   tokenization: {
     id: 'tokenization',
     title: 'Tokenization',
     description: 'How text becomes tokens.',
     routeName: 'Tokenization',
+    slidesSrc: '/slides/Tokenization.html',
+    nextPage: '/builder',
+    contentFile: '/content/tokenization.md',
   },
   nltk: {
     id: 'nltk',
     title: 'Language-Aware Tokenization',
     description: 'Make the tokenization better by making it language aware.',
     routeName: 'NLTK',
+    slidesSrc: '/slides/nltk.html',
+    nextPage: '/builder',
+    contentFile: '/content/nltk.md',
   },
   builder: {
     id: 'builder',
     title: 'Builder',
     description: 'Compose improvements interactively.',
     routeName: 'Builder',
+    slidesSrc: '',
+    contentFile: '',
   },
 }
 
@@ -120,4 +162,54 @@ export const FEATURE_TO_CHAPTER: Record<string, ChapterId | null> = {
   'tokenization': 'tokenization',
   'nltk': 'nltk',
   'select_corpus': null, // No chapter for corpus selection
+}
+
+/**
+ * Load chapter content from markdown file
+ * @param chapterId - The ID of the chapter to load
+ * @returns Promise resolving to chapter with steps
+ */
+export async function loadChapterContent(chapterId: ChapterId): Promise<ChapterContent> {
+  const chapter = CHAPTERS[chapterId]
+  if (!chapter) {
+    throw new Error(`Chapter '${chapterId}' not found`)
+  }
+
+  if (!chapter.contentFile) {
+    throw new Error(`Chapter '${chapterId}' has no content file`)
+  }
+
+  const response = await fetch(chapter.contentFile)
+  const markdown = await response.text()
+  
+  // Split by triple-dash delimiter (front-matter format)
+  // Pattern: match ---\nkey: value\n---\ncontent
+  const stepRegex = /---\n([\s\S]*?)\n---\n([\s\S]*?)(?=\n---\n|$)/g
+  const steps: ChapterStep[] = []
+  
+  let match
+  while ((match = stepRegex.exec(markdown)) !== null) {
+    const frontMatter = match[1]
+    const content = match[2].trim()
+    
+    let title = ''
+    let slide = 0
+    
+    // Parse front-matter
+    frontMatter.split('\n').forEach(line => {
+      const trimmed = line.trim()
+      if (trimmed.startsWith('slide:')) {
+        slide = parseInt(trimmed.split(':')[1].trim())
+      } else if (trimmed.startsWith('title:')) {
+        title = trimmed.split(':').slice(1).join(':').trim()
+      }
+    })
+    
+    steps.push({ title, text: content, slide })
+  }
+
+  return {
+    ...chapter,
+    steps,
+  }
 }
