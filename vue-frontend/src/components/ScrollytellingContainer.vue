@@ -56,16 +56,6 @@ onMounted(() => {
           .onStepEnter(({ index }) => {
             sendToIframe(props.steps[index].slide);
 
-            setTimeout(() => {
-              const iframeDoc = iframe.value?.contentDocument || iframe.value?.contentWindow?.document;
-              if (iframeDoc) {
-                const videos = iframeDoc.querySelectorAll('video');
-                if (videos[index]) {
-                  videos[index].play().catch(err => console.log('Video play failed:', err));
-                }
-              }
-            }, 100);
-
             document
               .querySelectorAll<HTMLElement>(".story-step")
               .forEach((el, i) => el.classList.toggle("is-active", i === index));

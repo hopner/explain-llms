@@ -182,30 +182,31 @@ export async function loadChapterContent(chapterId: ChapterId): Promise<ChapterC
   const response = await fetch(chapter.contentFile)
   const markdown = await response.text()
   
-  // Split by triple-dash delimiter (front-matter format)
-  // Pattern: match ---\nkey: value\n---\ncontent
-  const stepRegex = /---\n([\s\S]*?)\n---\n([\s\S]*?)(?=\n---\n|$)/g
+  // Parse front-matter style markdown
+  // Format: ---\nslide: N\n---\nContent\n---\nslide: N+1\n---\nContent...
   const steps: ChapterStep[] = []
   
-  let match
-  while ((match = stepRegex.exec(markdown)) !== null) {
-    const frontMatter = match[1]
-    const content = match[2].trim()
+  // Split by --- and process in pairs (front-matter + content)
+  const parts = markdown.split(/\n?---\n?/).filter(s => s.trim())
+  
+  for (let i = 0; i < parts.length; i += 2) {
+    const frontMatter = parts[i]
+    const content = parts[i + 1] || ''
     
     let title = ''
-    let slide = 0
+    let slide = Math.floor(i / 2)
     
     // Parse front-matter
-    frontMatter.split('\n').forEach(line => {
-      const trimmed = line.trim()
-      if (trimmed.startsWith('slide:')) {
-        slide = parseInt(trimmed.split(':')[1].trim())
-      } else if (trimmed.startsWith('title:')) {
-        title = trimmed.split(':').slice(1).join(':').trim()
+    const fmLines = frontMatter.trim().split('\n')
+    for (const line of fmLines) {
+      if (line.startsWith('slide:')) {
+        slide = parseInt(line.split(':')[1].trim())
+      } else if (line.startsWith('title:')) {
+        title = line.split(':').slice(1).join(':').trim()
       }
-    })
+    }
     
-    steps.push({ title, text: content, slide })
+    steps.push({ title, text: content.trim(), slide })
   }
 
   return {
