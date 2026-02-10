@@ -59,20 +59,20 @@ input {
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
-  border: 1px solid #215E61;
+  border: 1px solid var(--color-primary);
   border-radius: 0.5rem;
-  background: #ffffff;
-  color: #233D4D;
+  background: var(--color-white);
+  color: var(--color-text);
   font-family: inherit;
 }
 
 input::placeholder {
-  color: #215E61;
+  color: var(--color-primary);
 }
 
 input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(254, 127, 45, 0.1);
+  box-shadow: 0 0 0 3px var(--color-primary-10);
 }
 
 .input-wrapper {

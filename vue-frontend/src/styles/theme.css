@@ -1,0 +1,34 @@
+:root {
+  /* Color Palette */
+  --color-bg-primary: #F5FBE6;
+  --color-bg-secondary: #f0f7e6;
+  --color-primary: #215E61;
+  --color-primary-hover: #1a4a4d;
+  --color-text: #233D4D;
+  --color-accent: #FE7F2D;
+  --color-accent-hover: #e56f1f;
+  --color-white: #ffffff;
+  
+  /* Semantic Colors */
+  --color-node-selected: #215E61;
+  --color-node-available: #FE7F2D;
+  --color-node-locked: #D1D5DB;
+  
+  /* Opacity Variants */
+  --color-primary-10: rgba(33, 94, 97, 0.1);
+  --color-primary-15: rgba(33, 94, 97, 0.15);
+  --color-primary-60: rgba(254, 127, 45, 0.6);
+  --color-text-08: rgba(35, 61, 77, 0.08);
+  --color-text-12: rgba(35, 61, 77, 0.12);
+  
+  /* Scrollytelling specific */
+  --color-overlay-bg: rgba(255, 255, 255, 0.2);
+  --color-overlay-active: rgba(255, 255, 255, 0.8);
+  --color-overlay-shadow: rgba(0, 0, 0, 0.08);
+  --color-overlay-shadow-active: rgba(0, 0, 0, 0.15);
+  
+  /* Tooltip */
+  --color-tooltip-bg: #233D4D;
+  --color-tooltip-text: #F5FBE6;
+  --color-tooltip-bg-opacity: rgba(35, 61, 77, 0.95);
+}

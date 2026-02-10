@@ -90,15 +90,15 @@ const goTo = (item: OverviewItem) => {
 <style scoped>
 .overview-page {
     min-height: 100vh;
-    background: #F5FBE6;
-    color: #233D4D;
+    background: var(--color-bg-primary);
+    color: var(--color-text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 .overview-header {
     padding: 3rem 2rem 2rem;
-    border-bottom: 1px solid rgba(33, 94, 97, 0.15);
-    background: #f0f7e6;
+    border-bottom: 1px solid var(--color-primary-15);
+    background: var(--color-bg-secondary);
     text-align: center;
 }
 
@@ -109,8 +109,8 @@ const goTo = (item: OverviewItem) => {
 }
 
 .back-button {
-    background: #215E61;
-    color: #F5FBE6;
+    background: var(--color-primary);
+    color: var(--color-bg-primary);
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 0.6rem;
@@ -120,20 +120,20 @@ const goTo = (item: OverviewItem) => {
 }
 
 .back-button:hover {
-    background: #1a4a4d;
+    background: var(--color-primary-hover);
 }
 
 .overview-header h1 {
     margin: 0 0 0.75rem;
     font-size: 2.75rem;
-    color: #215E61;
+    color: var(--color-primary);
 }
 
 .overview-header p {
     margin: 0 auto;
     max-width: 720px;
     font-size: 1.1rem;
-    color: #233D4D;
+    color: var(--color-text);
 }
 
 .overview-content {
@@ -152,12 +152,12 @@ const goTo = (item: OverviewItem) => {
 .category-header h2 {
     margin: 0 0 0.4rem;
     font-size: 1.8rem;
-    color: #233D4D;
+    color: var(--color-text);
 }
 
 .category-header p {
     margin: 0;
-    color: #215E61;
+    color: var(--color-primary);
 }
 
 .category-grid {
@@ -167,39 +167,39 @@ const goTo = (item: OverviewItem) => {
 }
 
 .overview-card {
-    background: #ffffff;
-    border: 1px solid rgba(33, 94, 97, 0.15);
+    background: var(--color-white);
+    border: 1px solid var(--color-primary-15);
     border-radius: 1rem;
     padding: 1.5rem;
     text-align: left;
     cursor: pointer;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 6px 18px rgba(35, 61, 77, 0.08);
+    box-shadow: 0 6px 18px var(--color-text-08);
 }
 
 .overview-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(254, 127, 45, 0.6);
-    box-shadow: 0 12px 26px rgba(35, 61, 77, 0.12);
+    border-color: var(--color-primary-60);
+    box-shadow: 0 12px 26px var(--color-text-12);
 }
 
 .card-title {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #233D4D;
+    color: var(--color-text);
 }
 
 .card-description {
     margin-top: 0.5rem;
     font-size: 0.95rem;
-    color: #215E61;
+    color: var(--color-primary);
 }
 
 .card-meta {
     margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #FE7F2D;
+    color: var(--color-accent);
 }
 
 @media (max-width: 768px) {

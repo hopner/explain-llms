@@ -46,8 +46,8 @@ function goToNextPage() {
 }
 
 .next-page button {
-  background: #215E61;
-  color: #F5FBE6;
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
   border: none;
   padding: 1rem 2rem;
   border-radius: 9999px;
@@ -57,7 +57,7 @@ function goToNextPage() {
 }
 
 .next-page button:hover {
-  background: #FE7F2D;
+  background: var(--color-accent);
   transform: translateY(-2px);
 }
 </style>

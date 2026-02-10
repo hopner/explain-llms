@@ -95,7 +95,7 @@ function drawTree(treeData: any) {
             .x(d => d.x)
             .y(d => d.y)
         )
-        .attr('stroke', '#215E61')
+        .attr('stroke', 'var(--color-primary)')
         .attr('fill', 'none')
 
     const nodes = g.selectAll('.node')
@@ -160,9 +160,9 @@ function drawTree(treeData: any) {
             .attr('height', boxHeight)
             .attr('fill', (() => {
                 switch (d.data.status) {
-                    case 'selected': return '#215E61'
-                    case 'available': return '#FE7F2D'
-                    default: return '#D1D5DB'
+                    case 'selected': return 'var(--color-node-selected)'
+                    case 'available': return 'var(--color-node-available)'
+                    default: return 'var(--color-node-locked)'
                 }
             })())
 
@@ -226,7 +226,7 @@ function drawTree(treeData: any) {
             .attr('y', -padding)
             .attr('width', maxWidth + padding * 2)
             .attr('height', boxHeight)
-            .attr('fill', '#233D4D')
+            .attr('fill', 'var(--color-tooltip-bg)')
             .attr('rx', 8)
             .attr('opacity', 0.95)
 
@@ -236,7 +236,7 @@ function drawTree(treeData: any) {
                 .attr('x', 0)
                 .attr('y', i * lineHeight + 12)
                 .attr('text-anchor', 'middle')
-                .attr('fill', '#F5FBE6')
+                .attr('fill', 'var(--color-tooltip-text)')
                 .attr('font-size', 12)
                 .attr('font-family', LAYOUT.fontFamily)
                 .text(line)

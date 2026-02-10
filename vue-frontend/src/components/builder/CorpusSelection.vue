@@ -49,7 +49,7 @@ async function handleSubmit() {
     error.value = 'Please select at least one book'
     return
   }
-  
+
   try {
     loading.value = true
     await setCorpus(selectedBooks.value)
@@ -73,7 +73,7 @@ async function handleSubmit() {
       </div>
 
       <div v-if="loading" class="loading">Loading books...</div>
-      
+
       <div v-else-if="error" class="error">{{ error }}</div>
 
       <div v-else-if="books.length === 0" class="empty">No books available</div>
@@ -84,24 +84,13 @@ async function handleSubmit() {
         </p>
 
         <div class="books-list">
-          <div 
-            v-for="book in books" 
-            :key="book.id"
-            class="book-item"
-            :class="{ 
-              'selected': selectedBooks.includes(book.id),
-              'disabled': !selectedBooks.includes(book.id) && !canSelectMore
-            }"
-            @click="toggleBook(book.id)"
-          >
-            <input 
-              type="checkbox" 
-              :id="book.id"
-              :checked="selectedBooks.includes(book.id)"
-              :disabled="!selectedBooks.includes(book.id) && !canSelectMore"
-              @click.stop
-              @change="toggleBook(book.id)"
-            />
+          <div v-for="book in books" :key="book.id" class="book-item" :class="{
+            'selected': selectedBooks.includes(book.id),
+            'disabled': !selectedBooks.includes(book.id) && !canSelectMore
+          }" @click="toggleBook(book.id)">
+            <input type="checkbox" :id="book.id" :checked="selectedBooks.includes(book.id)"
+              :disabled="!selectedBooks.includes(book.id) && !canSelectMore" @click.stop
+              @change="toggleBook(book.id)" />
             <label :for="book.id" class="book-label">
               <span class="book-title">{{ book.title }}</span>
               <span class="book-author">by {{ book.author }}</span>
@@ -112,11 +101,7 @@ async function handleSubmit() {
 
       <div class="modal-footer">
         <button @click="emit('close')" class="btn btn-cancel">Cancel</button>
-        <button 
-          @click="handleSubmit" 
-          :disabled="selectedBooks.length === 0 || loading"
-          class="btn btn-submit"
-        >
+        <button @click="handleSubmit" :disabled="selectedBooks.length === 0 || loading" class="btn btn-submit">
           {{ loading ? 'Submitting...' : 'Submit' }}
         </button>
       </div>
@@ -139,7 +124,7 @@ async function handleSubmit() {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-white);
   border-radius: 12px;
   width: 90%;
   max-width: 600px;
@@ -151,7 +136,7 @@ async function handleSubmit() {
 
 .modal-header {
   padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-primary-15);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -161,6 +146,7 @@ async function handleSubmit() {
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
+  color: var(--color-text);
 }
 
 .close-btn {
@@ -168,7 +154,7 @@ async function handleSubmit() {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: #6b7280;
+  color: var(--color-primary);
   line-height: 1;
   padding: 0;
   width: 2rem;
@@ -176,7 +162,7 @@ async function handleSubmit() {
 }
 
 .close-btn:hover {
-  color: #374151;
+  color: var(--color-text);
 }
 
 .modal-body {
@@ -185,23 +171,25 @@ async function handleSubmit() {
   flex: 1;
 }
 
-.loading, .error, .empty {
+.loading,
+.error,
+.empty {
   padding: 2rem;
   text-align: center;
 }
 
 .error {
-  color: #ef4444;
+  color: var(--color-accent);
 }
 
 .empty {
-  color: #6b7280;
+  color: var(--color-primary);
 }
 
 .selection-info {
   margin-bottom: 1rem;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--color-primary);
 }
 
 .books-list {
@@ -215,20 +203,20 @@ async function handleSubmit() {
   align-items: flex-start;
   gap: 0.75rem;
   padding: 0.75rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--color-primary-15);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .book-item:hover:not(.disabled) {
-  border-color: #3b82f6;
-  background: #eff6ff;
+  border-color: var(--color-primary);
+  background: var(--color-bg-secondary);
 }
 
 .book-item.selected {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: var(--color-accent);
+  background: var(--color-bg-secondary);
 }
 
 .book-item.disabled {
@@ -254,17 +242,17 @@ async function handleSubmit() {
 
 .book-title {
   font-weight: 600;
-  color: #111827;
+  color: var(--color-text);
 }
 
 .book-author {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--color-primary);
 }
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--color-primary-15);
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
@@ -280,21 +268,21 @@ async function handleSubmit() {
 }
 
 .btn-cancel {
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
 }
 
 .btn-cancel:hover {
-  background: #e5e7eb;
+  background: var(--color-primary-15);
 }
 
 .btn-submit {
-  background: #3b82f6;
+  background: var(--color-primary);
   color: white;
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: #2563eb;
+  background: var(--color-accent);
 }
 
 .btn-submit:disabled {

@@ -55,7 +55,7 @@ onMounted(() => {
           })
           .onStepEnter(({ index }) => {
             sendToIframe(props.steps[index].slide);
-            
+
             setTimeout(() => {
               const iframeDoc = iframe.value?.contentDocument || iframe.value?.contentWindow?.document;
               if (iframeDoc) {
@@ -84,12 +84,7 @@ onBeforeUnmount(() => {
   <div class="scrollytelling-container">
     <!-- Left: Sticky Slideshow -->
     <div class="slideshow">
-      <iframe 
-      ref="iframe" 
-      :src="slidesSrc" 
-      class="slides-frame"
-      allow="autoplay; fullscreen"
-      ></iframe>
+      <iframe ref="iframe" :src="slidesSrc" class="slides-frame" allow="autoplay; fullscreen"></iframe>
     </div>
 
     <!-- Right: Scrollable Narrative -->
@@ -143,9 +138,9 @@ onBeforeUnmount(() => {
   min-height: 20vh;
   width: 100%;
   padding: .5rem 2rem;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-overlay-bg);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px var(--color-overlay-shadow);
   transition: all 0.3s ease;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   font-size: 1.25rem;
@@ -162,8 +157,8 @@ onBeforeUnmount(() => {
 }
 
 .story-step.is-active {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--color-overlay-active);
   transform: scale(1.02);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 48px var(--color-overlay-shadow-active);
 }
 </style>

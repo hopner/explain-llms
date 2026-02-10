@@ -32,7 +32,7 @@ const chapterOverview = () => {
     gap: 3rem;
     flex-direction: row;
     padding: 0;
-    background: #F5FBE6;
+    background: var(--color-bg-primary);
 }
 
 button {
@@ -55,19 +55,19 @@ button {
 }
 
 button:nth-child(1) {
-    background: #215E61;
+    background: var(--color-primary);
 }
 
 button:nth-child(1):hover {
-    background: #1a4a4d;
+    background: var(--color-primary-hover);
 }
 
 button:nth-child(2) {
-    background: #FE7F2D;
+    background: var(--color-accent);
 }
 
 button:nth-child(2):hover {
-    background: #e56f1f;
+    background: var(--color-accent-hover);
 }
 
 button:active {

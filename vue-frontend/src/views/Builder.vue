@@ -68,8 +68,8 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 <style scoped>
 .builder-container {
   min-height: 100vh;
-  background: #F5FBE6;
-  color: #233D4D;
+  background: var(--color-bg-primary);
+  color: var(--color-text);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   position: relative;
 }
@@ -78,7 +78,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
-  background: #215E61;
+  background: var(--color-primary);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -92,27 +92,27 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 }
 
 .back-button:hover {
-  background: #1a4a4d;
+  background: var(--color-primary-hover);
 }
 
 .builder-header {
   padding: 3rem 2rem;
   text-align: center;
-  border-bottom: 1px solid rgba(33, 94, 97, 0.15);
-  background: #f0f7e6;
+  border-bottom: 1px solid var(--color-primary-15);
+  background: var(--color-bg-secondary);
 }
 
 .builder-header h1 {
   margin: 0 0 0.5rem 0;
   font-size: 3rem;
   font-weight: 700;
-  color: #215E61;
+  color: var(--color-primary);
 }
 
 .subtitle {
   margin: 0;
   font-size: 1.125rem;
-  color: #FE7F2D;
+  color: var(--color-accent);
   font-weight: 400;
 }
 
