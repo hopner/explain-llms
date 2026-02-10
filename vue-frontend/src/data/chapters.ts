@@ -108,3 +108,16 @@ export const CHAPTER_CATEGORIES: ChapterCategory[] = [
     chapterIds: ['tokenization', 'nltk'],
   },
 ]
+
+// Map backend feature IDs to frontend chapter IDs
+export const FEATURE_TO_CHAPTER: Record<string, ChapterId | null> = {
+  'read_book': 'read_book',
+  'read_another': 'more_data',
+  '1gram': 'onegram',
+  '2gram': 'digram',
+  '3gram': 'trigram',
+  'weighted_random': 'weighted_random',
+  'tokenization': 'tokenization',
+  'nltk': 'nltk',
+  'select_corpus': null, // No chapter for corpus selection
+}

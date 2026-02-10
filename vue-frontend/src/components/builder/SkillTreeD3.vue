@@ -5,6 +5,7 @@ import { fetchSkillTree, addFeatureToConfig, removeFeatureFromConfig } from '../
 import { useRouter } from 'vue-router'
 import { featureToRoute } from '../../router/featureRoutes'
 import CorpusSelection from './CorpusSelection.vue'
+import { CHAPTERS, FEATURE_TO_CHAPTER } from '../../data/chapters'
 
 const props = defineProps<{
     boundingBox?: { width: number; height: number }
@@ -105,15 +106,47 @@ function drawTree(treeData: any) {
 
     nodes.each(function (this: any, d: any) {
         const g = d3.select(this)
-        const label = d.data.name.replace(/_/g, ' ')
-        const textLength = label.length * 7.2 // rough per-character width
-        const boxWidth = Math.max(80, textLength + 20)
+
+        // Get title and description from CHAPTERS if available
+        const chapterId = FEATURE_TO_CHAPTER[d.data.name]
+        const label = chapterId ? CHAPTERS[chapterId].title : d.data.name.replace(/_/g, ' ')
+        const description = chapterId ? CHAPTERS[chapterId].description : null
+
+        // Split long titles into multiple lines
+        const maxCharsPerLine = 15
+        const words = label.split(' ')
+        const lines: string[] = []
+        let currentLine = ''
+
+        words.forEach((word: string) => {
+            const testLine = currentLine ? `${currentLine} ${word}` : word
+            if (testLine.length > maxCharsPerLine && currentLine) {
+                lines.push(currentLine)
+                currentLine = word
+            } else {
+                currentLine = testLine
+            }
+        })
+        if (currentLine) lines.push(currentLine)
+
+        const maxLineLength = Math.max(...lines.map(l => l.length))
+        const boxWidth = Math.max(100, maxLineLength * 7.2 + 20)
+        const lineHeight = 14
+        const boxHeight = Math.max(30, lines.length * lineHeight + 10)
 
         const button = g.append('g')
             .attr('class', 'button')
             .style('cursor', d.data.status === 'available' || d.data.status === 'selected' ? 'pointer' : 'default')
-            .on('mouseover', function () { d3.select(this).select('rect.visible').attr('fill-opacity', 0.85) })
-            .on('mouseout', function () { d3.select(this).select('rect.visible').attr('fill-opacity', 1) })
+            .on('mouseover', function () {
+                d3.select(this).select('rect').attr('fill-opacity', 0.85)
+                if (description) {
+                    showTooltip(d.x, d.y, description)
+                }
+            })
+            .on('mouseout', function () {
+                d3.select(this).select('rect').attr('fill-opacity', 1)
+                hideTooltip()
+            })
             .on('click', function () {
                 if (d.data.status === 'available') selectAlternative(d.data.name)
                 else if (d.data.status === 'selected') removeSelected(d.data.name)
@@ -121,10 +154,10 @@ function drawTree(treeData: any) {
 
         button.append('rect')
             .attr('x', -boxWidth / 2)
-            .attr('y', -15)
+            .attr('y', -boxHeight / 2)
             .attr('rx', 8)
             .attr('width', boxWidth)
-            .attr('height', 30)
+            .attr('height', boxHeight)
             .attr('fill', (() => {
                 switch (d.data.status) {
                     case 'selected': return '#215E61'
@@ -133,14 +166,86 @@ function drawTree(treeData: any) {
                 }
             })())
 
-        button.append('text')
-            .attr('text-anchor', 'middle')
-            .attr('alignment-baseline', 'middle')
-            .attr('fill', '#FFFFFF')
-            .attr('font-size', 13)
-            .attr('font-weight', 600)
-            .text(label)
+        // Render each line of text
+        const startY = -(lines.length - 1) * lineHeight / 2
+        lines.forEach((line, i) => {
+            button.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('y', startY + i * lineHeight)
+                .attr('dy', '0.35em')
+                .attr('fill', '#FFFFFF')
+                .attr('font-size', 13)
+                .attr('font-weight', 600)
+                .text(line)
+        })
     })
+
+    function showTooltip(x: number, y: number, text: string) {
+        const tooltip = g.append('g')
+            .attr('class', 'tooltip')
+            .attr('transform', `translate(${x},${y + 40})`)
+
+        const padding = 12
+        const maxWidth = 250
+
+        // Create temporary text to measure dimensions
+        const tempText = tooltip.append('text')
+            .attr('font-size', 12)
+            .attr('font-family', LAYOUT.fontFamily)
+            .style('opacity', 0)
+            .text(text)
+
+        // Wrap text
+        const words = text.split(/\s+/)
+        const lines: string[] = []
+        let currentLine = ''
+
+        words.forEach(word => {
+            const testLine = currentLine ? `${currentLine} ${word}` : word
+            tempText.text(testLine)
+            const width = (tempText.node() as SVGTextElement).getComputedTextLength()
+
+            if (width > maxWidth && currentLine) {
+                lines.push(currentLine)
+                currentLine = word
+            } else {
+                currentLine = testLine
+            }
+        })
+        if (currentLine) lines.push(currentLine)
+
+        tempText.remove()
+
+        const lineHeight = 16
+        const textHeight = lines.length * lineHeight
+        const boxHeight = textHeight + padding * 2
+
+        // Background
+        tooltip.append('rect')
+            .attr('x', -maxWidth / 2 - padding)
+            .attr('y', -padding)
+            .attr('width', maxWidth + padding * 2)
+            .attr('height', boxHeight)
+            .attr('fill', '#233D4D')
+            .attr('rx', 8)
+            .attr('opacity', 0.95)
+
+        // Text lines
+        lines.forEach((line, i) => {
+            tooltip.append('text')
+                .attr('x', 0)
+                .attr('y', i * lineHeight + 12)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#F5FBE6')
+                .attr('font-size', 12)
+                .attr('font-family', LAYOUT.fontFamily)
+                .text(line)
+        })
+    }
+
+    function hideTooltip() {
+        g.selectAll('.tooltip').remove()
+    }
 
 
 }
