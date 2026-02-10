@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import ScrollytellingContainer from './ScrollytellingContainer.vue';
 import { defineProps } from 'vue';
 
@@ -10,9 +10,13 @@ const props = defineProps({
 });
 
 const router = useRouter();
+const route = useRoute();
 
 function goToNextPage() {
-  if (props.nextPage) {
+  // If user came from ChapterOverview, go back there
+  if (route.query.from === 'overview') {
+    router.push({ name: 'ChapterOverview' });
+  } else if (props.nextPage) {
     router.push(props.nextPage);
   }
 }
