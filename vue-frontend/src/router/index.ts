@@ -16,7 +16,7 @@ import NLTK from '../views/chapters/NLTK.vue'
 export default createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'Overview', component: HomeView },
+    { path: '/', name: 'Home', component: HomeView },
     { path: '/intro', name: 'Intro', component: Intro },
     { path: '/builder', name: 'Builder', component: Builder },
     { path: '/chapter-overview', name: 'ChapterOverview', component: ChapterOverview },

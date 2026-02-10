@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router'
 import PromptBar from '../components/builder/PromptBar.vue'
 import SkillTreeD3 from '../components/builder/SkillTreeD3.vue'
 
+const router = useRouter()
 const showImprovements = ref(false)
 
 const skillTreeWrapper = ref<HTMLElement | null>(null)
@@ -10,6 +12,10 @@ const treeBox = ref<{ width: number; height: number } | null>(null)
 
 function handlePromptUsed() {
   showImprovements.value = true
+}
+
+function goHome() {
+  router.push({ name: 'Home' })
 }
 
 async function measureBox() {
@@ -43,6 +49,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 
 <template>
   <div class="builder-container">
+    <button class="back-button" @click="goHome">← Back</button>
     <div class="builder-header">
       <h1>Build Your Own AI</h1>
       <p class="subtitle">Customize your language model by selecting improvements</p>
@@ -64,6 +71,28 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
   background: #F5FBE6;
   color: #233D4D;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: #215E61;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  z-index: 10;
+  font-family: inherit;
+}
+
+.back-button:hover {
+  background: #1a4a4d;
 }
 
 .builder-header {
