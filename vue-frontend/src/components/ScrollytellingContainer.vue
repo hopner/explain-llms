@@ -16,6 +16,19 @@ const props = defineProps<{
 const iframe = ref<HTMLIFrameElement | null>(null);
 let scroller: ReturnType<typeof scrollama> | null = null;
 
+function attemptAutoplay() {
+  const iframeDoc = iframe.value?.contentDocument || iframe.value?.contentWindow?.document;
+  if (!iframeDoc) return;
+
+  const videos = iframeDoc.querySelectorAll('video');
+  videos.forEach(video => {
+    video.muted = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.play().catch(() => null);
+  });
+}
+
 function sendToIframe(slideIndex: number) {
   if (iframe.value && iframe.value.contentWindow) {
     iframe.value.contentWindow.postMessage(
@@ -39,8 +52,9 @@ onMounted(() => {
             video.muted = true;
             video.playsInline = true;
             video.autoplay = true;
-            video.play().catch(err => console.log('Video play failed:', err));
           });
+
+          iframeDoc.addEventListener('click', () => attemptAutoplay(), { once: true });
         }
 
         sendToIframe(props.steps[0].slide);
@@ -68,6 +82,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   scroller?.destroy();
 });
+
+defineExpose({ attemptAutoplay });
 </script>
 
 <template>

@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const USER_COOKIE_NAME = 'user_guid';
 const INTRO_SEEN_KEY = 'intro_seen';
+const AUTOPLAY_DISMISSED_GLOBAL_KEY = 'autoplay_dismissed_global';
 
 export async function getUserId(): Promise<string> {
     const existingGuid = getCookie(USER_COOKIE_NAME);
@@ -27,6 +28,14 @@ export function markIntroAsSeen() {
 
 export function resetIntroStatus() {
     localStorage.removeItem(INTRO_SEEN_KEY);
+}
+
+export function hasSeenAutoplayPromptGlobal(): boolean {
+    return localStorage.getItem(AUTOPLAY_DISMISSED_GLOBAL_KEY) === 'true';
+}
+
+export function dismissAutoplayPromptGlobal() {
+    localStorage.setItem(AUTOPLAY_DISMISSED_GLOBAL_KEY, 'true');
 }
 
 function getCookie(name: string): string | null {
