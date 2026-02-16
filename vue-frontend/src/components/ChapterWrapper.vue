@@ -9,10 +9,13 @@ const props = defineProps({
   nextPage: { type: String, required: false },
 });
 
+const emit = defineEmits(['complete']);
 const router = useRouter();
 const route = useRoute();
 
 function goToNextPage() {
+  emit('complete');
+
   // If user came from ChapterOverview, go back there
   if (route.query.from === 'overview') {
     router.push({ name: 'ChapterOverview' });

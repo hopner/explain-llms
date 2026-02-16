@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 const USER_COOKIE_NAME = 'user_guid';
+const INTRO_SEEN_KEY = 'intro_seen';
 
 export async function getUserId(): Promise<string> {
     const existingGuid = getCookie(USER_COOKIE_NAME);
@@ -10,9 +11,22 @@ export async function getUserId(): Promise<string> {
     const newGuid = uuidv4();
     setCookie(USER_COOKIE_NAME, newGuid, 365);
 
-    await registerUser(newGuid)  // Add await here
+    await registerUser(newGuid)
 
     return newGuid;
+}
+
+export function hasSeenIntro(): boolean {
+    return localStorage.getItem(INTRO_SEEN_KEY) === 'true';
+}
+
+export function markIntroAsSeen() {
+    localStorage.setItem(INTRO_SEEN_KEY, 'true');
+    console.log('Intro marked as seen');
+}
+
+export function resetIntroStatus() {
+    localStorage.removeItem(INTRO_SEEN_KEY);
 }
 
 function getCookie(name: string): string | null {

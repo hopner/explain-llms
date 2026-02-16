@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { hasSeenIntro } from '../api/user';
 const router = useRouter();
 
 const modelBuilder = () => {
+    if (hasSeenIntro()) {
+        router.push({ name: 'Builder' });
+        return;
+    }
     router.push({ name: 'Intro' });
 };
 
