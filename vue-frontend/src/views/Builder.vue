@@ -18,6 +18,10 @@ function goHome() {
   router.push({ name: 'Home' })
 }
 
+function goToGenerator() {
+  router.push({ name: 'TextGenerator' })
+}
+
 async function measureBox() {
   await nextTick()
   const el = skillTreeWrapper.value
@@ -50,6 +54,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 <template>
   <div class="builder-container">
     <button class="back-button" @click="goHome">← Back</button>
+    <button class="generator-button" @click="goToGenerator">Text generator</button>
     <div class="builder-header">
       <h1>Build Your Own AI</h1>
       <p class="subtitle">Customize your language model by selecting improvements</p>
@@ -92,6 +97,27 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 }
 
 .back-button:hover {
+  background: var(--color-primary-hover);
+}
+
+.generator-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  z-index: 10;
+  font-family: inherit;
+}
+
+.generator-button:hover {
   background: var(--color-primary-hover);
 }
 

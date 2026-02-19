@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Intro from '../views/chapters/Intro.vue'
 import Builder from '../views/Builder.vue'
+import TextGenerator from '../views/TextGenerator.vue'
 import ChapterOverview from '../views/ChapterOverview.vue'
 import ExampleChapter from '../views/ExampleChapter.vue'
 import ReadBook from '../views/chapters/ReadBook.vue'
@@ -19,6 +20,7 @@ export default createRouter({
     { path: '/', name: 'Home', component: HomeView },
     { path: '/intro', name: 'Intro', component: Intro },
     { path: '/builder', name: 'Builder', component: Builder },
+    { path: '/generator', name: 'TextGenerator', component: TextGenerator },
     { path: '/chapter-overview', name: 'ChapterOverview', component: ChapterOverview },
     { path: '/example', name: 'Example', component: ExampleChapter },
     { path: '/chapters/readbook', name: 'ReadBook', component: ReadBook },

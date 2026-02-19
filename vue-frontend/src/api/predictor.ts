@@ -6,8 +6,5 @@ export async function predict(prompt: string): Promise<string> {
   })
   if (!response.ok) throw new Error('Prediction API error')
   const data = await response.json()
-  if (data.model) {
-    localStorage.setItem('trainedModel', JSON.stringify(data.model))
-  }
   return data.prediction
 }
