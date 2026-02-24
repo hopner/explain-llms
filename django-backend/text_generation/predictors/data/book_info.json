@@ -40,5 +40,17 @@
         "title": "Romeo and Juliet",
         "author": "William Shakespeare",
         "path": "./text_generation/predictors/data/romeo_and_juliet.txt"
+    },
+    {
+        "id": "monte_cristo",
+        "title": "The Count of Monte Cristo",
+        "author": "Alexandre Dumas",
+        "path": "./text_generation/predictors/data/monte_cristo.txt"
+    },
+    {
+        "id": "les_miserables",
+        "title": "Les Misérables",
+        "author": "Victor Hugo",
+        "path": "./text_generation/predictors/data/les_miserables.txt"
     }
 ]
