@@ -143,7 +143,7 @@ defineExpose({ attemptAutoplay });
 .story-step {
   min-height: 20vh;
   width: 100%;
-  padding: .5rem 2rem;
+  padding: .2rem 6rem;
   background: var(--color-overlay-bg);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 20px var(--color-overlay-shadow);
