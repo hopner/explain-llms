@@ -31,13 +31,6 @@ async function measureBox() {
   treeBox.value = { width, height }
 }
 
-watch(showImprovements, async (val) => {
-  if (val) {
-    await measureBox()
-    document.querySelector('#skill-tree')?.scrollIntoView({ behavior: 'smooth' })
-  }
-})
-
 let resizeTimer: number | null = null
 function onResize() {
   if (!showImprovements.value) return
@@ -57,7 +50,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     <button class="generator-button" @click="goToGenerator">Text generator</button>
     <div class="builder-header">
       <h1>Build Your Own AI</h1>
-      <p class="subtitle">Customize your language model by selecting improvements</p>
+      <p class="subtitle">Select improvements below to customize your language model</p>
     </div>
 
     <div class="prompt-section">
@@ -65,7 +58,7 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
     </div>
 
     <div id="skill-tree" ref="skillTreeWrapper" class="skill-tree-wrapper">
-      <SkillTreeD3 v-if="showImprovements" :boundingBox="treeBox || undefined" />
+      <SkillTreeD3 :boundingBox="treeBox || undefined" />
     </div>
   </div>
 </template>
