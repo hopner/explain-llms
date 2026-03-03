@@ -71,20 +71,6 @@ function capitalizeAfterPeriod(token: string, text: string): string {
     return token
 }
 
-function isLooping(tokens: string[], seen:Set<string>): boolean {
-    for (let ngramSize = MIN_NGRAM; ngramSize <= MAX_NGRAM; ngramSize++) {
-        if (tokens.length < ngramSize) {
-            continue
-        }
-        const ngram = tokens.slice(-ngramSize).join(' ')
-        if (seen.has(ngram)) {
-            return true
-        }
-        seen.add(ngram)
-    }
-    return false
-}
-
 function detectLoop(tokens: string[], seen:Set<string>): string | null {
     for (let ngramSize = MIN_NGRAM; ngramSize <= MAX_NGRAM; ngramSize++) {
         if (tokens.length < ngramSize) {

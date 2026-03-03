@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import PromptBar from '../components/builder/PromptBar.vue'
 import SkillTreeD3 from '../components/builder/SkillTreeD3.vue'
