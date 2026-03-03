@@ -72,7 +72,7 @@ function capitalizeAfterPeriod(token: string, text: string): string {
 }
 
 function detectLoop(tokens: string[], seen:Set<string>): string | null {
-    for (let ngramSize = MIN_NGRAM; ngramSize <= MAX_NGRAM; ngramSize++) {
+    for (let ngramSize = MAX_NGRAM; ngramSize >= MIN_NGRAM; ngramSize--) {
         if (tokens.length < ngramSize) {
             continue
         }
