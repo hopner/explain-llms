@@ -144,6 +144,9 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
 .skill-tree-wrapper {
   padding: 3rem 2rem;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 @media (max-width: 768px) {

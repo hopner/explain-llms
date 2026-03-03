@@ -24,7 +24,7 @@ const LAYOUT = {
     height: 800,
     minWidth: 600,
     minHeight: 300,
-    margin: { top: 60, right: 100, bottom: 50, left: 50 },
+    margin: { top: 60, right: 100, bottom: 50, left: 2 },
     nodeSpacing: { x: 120, y: 50 },
     minBoxWidth: 80,
     boxHorizontalPadding: 20,
@@ -289,7 +289,7 @@ async function removeSelected(featureId: string) {
 </script>
 
 <template>
-    <div class="flex justify-center p-8">
+    <div class="flex justify-center">
         <svg ref="svgRef"></svg>
         <CorpusSelection v-if="showCorpusModal" @close="showCorpusModal = false" @submit="handleCorpusSubmit" />
     </div>
@@ -310,7 +310,7 @@ async function removeSelected(featureId: string) {
 }
 
 svg {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     overflow: visible;
 }
