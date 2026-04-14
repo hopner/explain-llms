@@ -19,12 +19,55 @@ type OverviewCategory = {
 }
 
 const externalLinks: OverviewItem[] = [
-    {
-        type: 'external',
-        title: 'Test',
-        description: 'This is a test link.',
-        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    },
+  {
+    type: 'external',
+    title: 'Transformer Explainer',
+    description:
+      'Want a closer look on how LLMs really work? This visualization shows the inner workings of a transformer model in an interactive way.',
+    url: 'https://poloclub.github.io/transformer-explainer/',
+  },
+  {
+    type: 'external',
+    title: "A Student's Guide to Not Writing with ChatGPT",
+    description:
+      "This article provides arguments against OpenAI's reasons for why students should use ChatGPT for writing assignments, and offers alternative perspectives on the issue.",
+    url: 'https://www.arthurperret.fr/blog/2024-11-14-student-guide-not-writing-with-chatgpt.html',
+  },
+  {
+    type: 'external',
+    title: 'LLMs Explained Briefly by 3Blue1Brown',
+    description:
+      'This video by 3Blue1Brown provides a brief and intuitive explanation of how large language models work, using visualizations and analogies to make the concepts more accessible.',
+    url: 'https://www.youtube.com/watch?v=LPZh9BOjkQs',
+  },
+  {
+    type: 'external',
+    title: 'Interactive Essays on Machine Learning Topics',
+    description:
+      'This collection of interactive essays by Google provides in-depth explanations of various machine learning topics.',
+    url: 'https://pair.withgoogle.com/explorables/',
+  },
+  {
+    type: 'external',
+    title: 'How GPT models work by Bea Stollnitz',
+    description:
+      'This blog post by Bea Stollnitz provides a brief and effective explanation of how GPT models work. She also has a more technical version for data scientists and engineers.',
+    url: 'https://bea.stollnitz.com/blog/how-gpt-works/',
+  },
+  {
+    type: 'external',
+    title: 'The Bullshit Machines by Bergstrom and West',
+    description:
+      'This is more detailed course on the inner workings of LLMs aimed at a non-technical audience.',
+    url: 'https://thebullshitmachines.com',
+  },
+  {
+    type: 'external',
+    title: 'Save the AI',
+    description:
+      'This website provides information on the environmental impact of LLMs.',
+    url: 'https://savethe.ai/',
+  },
 ]
 
 const categories: OverviewCategory[] = [
