@@ -2,7 +2,7 @@
 slide: 0
 ---
 
-As the model is now, we are picking words based on their overall frequency in the dictionary. On the left you can see an example histogram for following the word "the".
+As the model is now, we are picking the most frequent word from the training data. On the left you can see an example histogram for the words that were found following the word "the".
 
 ---
 slide: 1
@@ -14,7 +14,7 @@ This is what we call a deterministic model as it will always pick the most likel
 slide: 2
 ---
 
-Now we can select a word by just spinning the wheel and pick the word the wheel lands on.
+Now we can select a word by spinning the wheel and pick the word the wheel lands on.
 
 ---
 slide: 3
