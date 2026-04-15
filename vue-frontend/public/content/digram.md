@@ -2,13 +2,13 @@
 slide: 0
 ---
 
-Remeber how we can count word frequencies?
+Remember how we can count word frequencies? So far we counted words individually. Let's extend that to include a little bit of context. 
 
 ---
 slide: 1
 ---
 
-However, the word that comes before often matters to what the next word is.
+The word that comes before influences how likely the possibilities for the next word are.
 
 ---
 slide: 2
@@ -20,7 +20,7 @@ We can map our entire text in this way.
 slide: 3
 ---
 
-This can be stored in table, like how dictionaries have definitions for each word we will have the distribution of following words for each word.
+For each word we count how often each following word occurs and save the distributions in a table.
 
 ---
 slide: 4
@@ -32,7 +32,7 @@ Given larger data, we need to store a lot more information.
 slide: 5
 ---
 
-Each token that appears in the text has its own set of possible following tokens.
+Each word that appears in the text has its own set of possible following words.
 
 ---
 slide: 6
